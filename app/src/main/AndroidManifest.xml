@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.fachtnaroe.pcpitstop_git">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="net.fachtnaroe.pcpitstop_git.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.startingLogin_screen01"
+            android:label="screen_Login">
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.operatorHome_screen02"
+            android:label="screen_operatorHome">
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.jobAddEdit_screen03"
+            android:label="screen_jobAddEdit">
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.customerAddEdit_screen04"
+            android:label="screen_customerAddEdit">
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.technicianHome_screen05"
+            android:label="screen_technicianHome">
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.customerHome_screen07"
+            android:label="screen_customerHome">
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.administratorHome_screen09"
+            android:label="screen_administratorHome">
+        </activity>
+        <activity
+            android:name="net.fachtnaroe.pcpitstop_git.userAddEdit_screen10"
+            android:label="screen_userAddEdit">
+        </activity>
+
+    </application>
+
+</manifest>
