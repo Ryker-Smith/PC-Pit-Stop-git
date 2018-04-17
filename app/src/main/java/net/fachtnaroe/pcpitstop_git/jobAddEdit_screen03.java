@@ -1,11 +1,9 @@
 package net.fachtnaroe.pcpitstop_git;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.view.WindowManager;
 
 import com.google.appinventor.components.runtime.Button;
-import com.google.appinventor.components.runtime.Component;
 import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
 import com.google.appinventor.components.runtime.HorizontalArrangement;
@@ -16,174 +14,174 @@ import com.google.appinventor.components.runtime.VerticalArrangement;
 
 public class jobAddEdit_screen03 extends Form implements HandlesEventDispatching
 {
-    private VerticalArrangement PCPS_mainContainer;
-    private VerticalArrangement PCPS_leftSideSpacer;
-    private VerticalArrangement PCPS_headerArrangement;
-    private HorizontalArrangement PCPS_AddJobScreenBodyWithSpacer;
-    private VerticalArrangement PCPS_AddJobScreenBody;
-    private HorizontalArrangement PCPS_CustomerNumField;
-    private HorizontalArrangement PCPS_LocationField;
-    private HorizontalArrangement PCPS_HomeAddressField;
-    private HorizontalArrangement PCPS_GPSField;
-    private HorizontalArrangement PCPS_DescriptionField;
-    private HorizontalArrangement PCPS_ImageField;
-    private Label PCPS_Title;
-    private Label PCPS_CustomerLabel;
-    private Spinner PCPS_CustomerNum;
-    private Label PCPS_LocationLabel;
-    private TextBox PCPS_Location;
-    private Button PCPS_UseGPSButton;
-    private TextBox PCPS_GPSLocation;
-    private Label PCPS_DescriptionLabel;
-    private TextBox PCPS_Description;
-    private Label PCPS_ImagesLabel;
-    private HorizontalArrangement PCPS_AddJobControlButtonArea;
-    private Button PCPS_AddJobControl_Save;
-    private Button PCPS_HomeAddressButton;
-    private TextBox PCPS_HomeAddressTextBox;
-    private Button PCPS_AddImageButton;
+    private VerticalArrangement mainContainer;
+    private VerticalArrangement leftSideSpacer;
+    private VerticalArrangement headerArrangement;
+    private HorizontalArrangement addJobScreenBodyWithSpacer;
+    private VerticalArrangement addJobScreenBody;
+    private HorizontalArrangement customerNumField;
+    private HorizontalArrangement locationField;
+    private HorizontalArrangement homeAddressField;
+    private HorizontalArrangement GPSField;
+    private HorizontalArrangement descriptionField;
+    private HorizontalArrangement imageField;
+    private Label title;
+    private Label customerLabel;
+    private Spinner customerNum;
+    private Label locationLabel;
+    private TextBox location;
+    private Button useGPSButton;
+    private TextBox GPSLocation;
+    private Label descriptionLabel;
+    private TextBox description;
+    private Label imagesLabel;
+    private HorizontalArrangement addJobControlButtonArea;
+    private Button addJobControlSave;
+    private Button homeAddressButton;
+    private TextBox homeAddressTextBox;
+    private Button addImageButton;
 
 
     protected void $define()
     {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        PCPS_mainContainer = new VerticalArrangement(this);
-        PCPS_mainContainer.Width(getScreenWidth());
-        PCPS_mainContainer.Height(getScreenHeight());
-        PCPS_mainContainer.BackgroundColor(0xff99bbff);
+        mainContainer = new VerticalArrangement(this);
+        mainContainer.Width(getScreenWidth());
+        mainContainer.Height(getScreenHeight());
+        mainContainer.BackgroundColor(0xff99bbff);
 
-        PCPS_headerArrangement = new VerticalArrangement(PCPS_mainContainer);
-        PCPS_headerArrangement.Width((int)(getScreenWidth()));
-        PCPS_headerArrangement.HeightPercent(10);
-        PCPS_headerArrangement.AlignHorizontal(1);
-        PCPS_headerArrangement.AlignVertical(1);
+        headerArrangement = new VerticalArrangement(mainContainer);
+        headerArrangement.Width((int)(getScreenWidth()));
+        headerArrangement.HeightPercent(10);
+        headerArrangement.AlignHorizontal(1);
+        headerArrangement.AlignVertical(1);
 
-        PCPS_Title = new Label(PCPS_headerArrangement);
-        PCPS_Title.Text("Add Job");
-        PCPS_Title.FontSize(20);
-        PCPS_Title.FontBold(true);
-        PCPS_Title.TextColor(0xffffffff);
-        PCPS_Title.Visible(true);
+        title = new Label(headerArrangement);
+        title.Text("Add Job");
+        title.FontSize(20);
+        title.FontBold(true);
+        title.TextColor(0xffffffff);
+        title.Visible(true);
 
-        PCPS_AddJobScreenBodyWithSpacer = new HorizontalArrangement(PCPS_mainContainer);
-        PCPS_AddJobScreenBodyWithSpacer.Width((int)(getScreenWidth()));
-        PCPS_AddJobScreenBodyWithSpacer.Height((int)(getScreenHeight()));
+        addJobScreenBodyWithSpacer = new HorizontalArrangement(mainContainer);
+        addJobScreenBodyWithSpacer.Width((int)(getScreenWidth()));
+        addJobScreenBodyWithSpacer.Height((int)(getScreenHeight()));
 
         //spacer that keeps everything 5% from the left
-        PCPS_leftSideSpacer = new VerticalArrangement(PCPS_AddJobScreenBodyWithSpacer);
-        PCPS_leftSideSpacer.WidthPercent(10);
-        PCPS_leftSideSpacer.Height(getScreenHeight());
+        leftSideSpacer = new VerticalArrangement(addJobScreenBodyWithSpacer);
+        leftSideSpacer.WidthPercent(10);
+        leftSideSpacer.Height(getScreenHeight());
 
-        PCPS_AddJobScreenBody = new VerticalArrangement(PCPS_AddJobScreenBodyWithSpacer);
-        PCPS_AddJobScreenBody.WidthPercent(90);
-        PCPS_AddJobScreenBody.Height((int)(getScreenHeight()));
+        addJobScreenBody = new VerticalArrangement(addJobScreenBodyWithSpacer);
+        addJobScreenBody.WidthPercent(90);
+        addJobScreenBody.Height((int)(getScreenHeight()));
 
-        PCPS_CustomerNumField = new HorizontalArrangement(PCPS_AddJobScreenBody);
-        PCPS_CustomerNumField.WidthPercent(90);
-        PCPS_CustomerNumField.BackgroundColor(0xffe6f2ff);
+        customerNumField = new HorizontalArrangement(addJobScreenBody);
+        customerNumField.WidthPercent(90);
+        customerNumField.BackgroundColor(0xffe6f2ff);
 
-        PCPS_LocationField = new HorizontalArrangement(PCPS_AddJobScreenBody);
-        PCPS_LocationField.WidthPercent(90);
-        PCPS_LocationField.BackgroundColor(0xffffffff);
+        locationField = new HorizontalArrangement(addJobScreenBody);
+        locationField.WidthPercent(90);
+        locationField.BackgroundColor(0xffffffff);
 
-        PCPS_HomeAddressField = new HorizontalArrangement(PCPS_AddJobScreenBody);
-        PCPS_HomeAddressField.WidthPercent(90);
-        PCPS_HomeAddressField.BackgroundColor(0xffe6f2ff);
+        homeAddressField = new HorizontalArrangement(addJobScreenBody);
+        homeAddressField.WidthPercent(90);
+        homeAddressField.BackgroundColor(0xffe6f2ff);
 
-        PCPS_GPSField = new HorizontalArrangement(PCPS_AddJobScreenBody);
-        PCPS_GPSField.WidthPercent(90);
-        PCPS_GPSField.BackgroundColor(0xffffffff);
+        GPSField = new HorizontalArrangement(addJobScreenBody);
+        GPSField.WidthPercent(90);
+        GPSField.BackgroundColor(0xffffffff);
 
-        PCPS_DescriptionField = new HorizontalArrangement(PCPS_AddJobScreenBody);
-        PCPS_DescriptionField.WidthPercent(90);
-        PCPS_DescriptionField.BackgroundColor(0xffe6f2ff);
+        descriptionField = new HorizontalArrangement(addJobScreenBody);
+        descriptionField.WidthPercent(90);
+        descriptionField.BackgroundColor(0xffe6f2ff);
 
-        PCPS_ImageField = new HorizontalArrangement(PCPS_AddJobScreenBody);
-        PCPS_ImageField.WidthPercent(90);
-        PCPS_ImageField.BackgroundColor(0xffffffff);
+        imageField = new HorizontalArrangement(addJobScreenBody);
+        imageField.WidthPercent(90);
+        imageField.BackgroundColor(0xffffffff);
 
         //Customer Field
-        PCPS_CustomerLabel = new Label(PCPS_CustomerNumField);
-        PCPS_CustomerLabel.HeightPercent(10);
-        PCPS_CustomerLabel.WidthPercent(30);
-        PCPS_CustomerLabel.TextColor(0xff000000);
-        PCPS_CustomerLabel.Visible(true);
-        PCPS_CustomerLabel.Text("Customer#:");
+        customerLabel = new Label(customerNumField);
+        customerLabel.HeightPercent(10);
+        customerLabel.WidthPercent(30);
+        customerLabel.TextColor(0xff000000);
+        customerLabel.Visible(true);
+        customerLabel.Text("Customer#:");
 
-        PCPS_CustomerNum = new Spinner(PCPS_CustomerNumField);
-        PCPS_CustomerNum.HeightPercent(10);
-        PCPS_CustomerNum.WidthPercent(60);
-        PCPS_CustomerNum.Prompt("Select...");
+        customerNum = new Spinner(customerNumField);
+        customerNum.HeightPercent(10);
+        customerNum.WidthPercent(60);
+        customerNum.Prompt("Select...");
 
-        //Location field
-        PCPS_LocationLabel = new Label(PCPS_LocationField);
-        PCPS_LocationLabel.HeightPercent(10);
-        PCPS_LocationLabel.TextColor(0xff000000);
-        PCPS_LocationLabel.Visible(true);
-        PCPS_LocationLabel.Text("Location:");
-        PCPS_LocationLabel.WidthPercent(24);
+        //location field
+        locationLabel = new Label(locationField);
+        locationLabel.HeightPercent(10);
+        locationLabel.TextColor(0xff000000);
+        locationLabel.Visible(true);
+        locationLabel.Text("location:");
+        locationLabel.WidthPercent(24);
 
-        PCPS_Location = new TextBox(PCPS_LocationField);
-        PCPS_Location.WidthPercent(60);
-        PCPS_Location.BackgroundColor(0xffffffff);
+        location = new TextBox(locationField);
+        location.WidthPercent(60);
+        location.BackgroundColor(0xffffffff);
 
         //Home Address
-        PCPS_HomeAddressButton = new Button(PCPS_HomeAddressField);
-        PCPS_HomeAddressButton.WidthPercent(25);
-        PCPS_HomeAddressButton.Text("Use Home Address");
-        PCPS_HomeAddressButton.HeightPercent(10);
-        PCPS_HomeAddressButton.FontSize(10);
-        PCPS_HomeAddressButton.BackgroundColor(0xff004a99);
-        PCPS_HomeAddressButton.TextColor(0xffffffff);
+        homeAddressButton = new Button(homeAddressField);
+        homeAddressButton.WidthPercent(25);
+        homeAddressButton.Text("Use Home Address");
+        homeAddressButton.HeightPercent(10);
+        homeAddressButton.FontSize(10);
+        homeAddressButton.BackgroundColor(0xff004a99);
+        homeAddressButton.TextColor(0xffffffff);
 
-        PCPS_HomeAddressTextBox = new TextBox(PCPS_HomeAddressField);
-        PCPS_HomeAddressTextBox.HeightPercent(10);
-        PCPS_HomeAddressTextBox.WidthPercent(60);
-        PCPS_HomeAddressTextBox.BackgroundColor(0xffe6f2ff);
+        homeAddressTextBox = new TextBox(homeAddressField);
+        homeAddressTextBox.HeightPercent(10);
+        homeAddressTextBox.WidthPercent(60);
+        homeAddressTextBox.BackgroundColor(0xffe6f2ff);
 
         //GPS
-        PCPS_UseGPSButton = new Button(PCPS_GPSField);
-        PCPS_UseGPSButton.HeightPercent(10);
-        PCPS_UseGPSButton.Text("Use GPS");
-        PCPS_UseGPSButton.WidthPercent(25);
-        PCPS_UseGPSButton.FontSize(10);
-        PCPS_UseGPSButton.BackgroundColor(0xff004a99);
-        PCPS_UseGPSButton.TextColor(0xffffffff);
+        useGPSButton = new Button(GPSField);
+        useGPSButton.HeightPercent(10);
+        useGPSButton.Text("Use GPS");
+        useGPSButton.WidthPercent(25);
+        useGPSButton.FontSize(10);
+        useGPSButton.BackgroundColor(0xff004a99);
+        useGPSButton.TextColor(0xffffffff);
 
-        PCPS_GPSLocation = new TextBox(PCPS_GPSField);
-        PCPS_GPSLocation.HeightPercent(10);
-        PCPS_GPSLocation.WidthPercent(60);
-        PCPS_GPSLocation.BackgroundColor(0xffffffff);
+        GPSLocation = new TextBox(GPSField);
+        GPSLocation.HeightPercent(10);
+        GPSLocation.WidthPercent(60);
+        GPSLocation.BackgroundColor(0xffffffff);
 
-        //Description
-        PCPS_DescriptionLabel = new Label(PCPS_DescriptionField);
-        PCPS_DescriptionLabel.HeightPercent(10);
-        PCPS_DescriptionLabel.WidthPercent(24);
-        PCPS_DescriptionLabel.TextColor(0xff000000);
-        PCPS_DescriptionLabel.Visible(true);
-        PCPS_DescriptionLabel.Text("Description:");
+        //description
+        descriptionLabel = new Label(descriptionField);
+        descriptionLabel.HeightPercent(10);
+        descriptionLabel.WidthPercent(24);
+        descriptionLabel.TextColor(0xff000000);
+        descriptionLabel.Visible(true);
+        descriptionLabel.Text("description:");
 
-        PCPS_Description = new TextBox(PCPS_DescriptionField);
-        PCPS_Description.HeightPercent(25);
-        PCPS_Description.WidthPercent(60);
-        PCPS_Description.BackgroundColor(0xffe6f2ff);
+        description = new TextBox(descriptionField);
+        description.HeightPercent(25);
+        description.WidthPercent(60);
+        description.BackgroundColor(0xffe6f2ff);
 
         //Images
-        PCPS_ImagesLabel = new Label(PCPS_ImageField);
-        PCPS_ImagesLabel.HeightPercent(10);
-        PCPS_ImagesLabel.Text("Images:");
+        imagesLabel = new Label(imageField);
+        imagesLabel.HeightPercent(10);
+        imagesLabel.Text("Images:");
 
-        PCPS_AddJobControlButtonArea = new HorizontalArrangement(PCPS_AddJobScreenBody);
-        PCPS_AddJobControlButtonArea.WidthPercent(90);
-        PCPS_AddJobControlButtonArea.BackgroundColor(0xff99bbff);
-        PCPS_AddJobControlButtonArea.HeightPercent(10);
+        addJobControlButtonArea = new HorizontalArrangement(addJobScreenBody);
+        addJobControlButtonArea.WidthPercent(90);
+        addJobControlButtonArea.BackgroundColor(0xff99bbff);
+        addJobControlButtonArea.HeightPercent(10);
 
-        PCPS_AddImageButton = new Button(PCPS_AddJobControlButtonArea);
-        PCPS_AddImageButton.WidthPercent(25);
-        PCPS_AddImageButton.Text("Add Images");
-        PCPS_AddImageButton.BackgroundColor(0xff004a99);
-        PCPS_AddImageButton.TextColor(0xffffffff);
-        PCPS_AddImageButton.FontSize(10);
+        addImageButton = new Button(addJobControlButtonArea);
+        addImageButton.WidthPercent(25);
+        addImageButton.Text("Add Images");
+        addImageButton.BackgroundColor(0xff004a99);
+        addImageButton.TextColor(0xffffffff);
+        addImageButton.FontSize(10);
     }
 
     public static int getScreenWidth()

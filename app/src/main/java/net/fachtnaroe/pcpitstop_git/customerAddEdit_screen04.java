@@ -13,192 +13,192 @@ import com.google.appinventor.components.runtime.VerticalArrangement;
 
 public class customerAddEdit_screen04 extends Form implements HandlesEventDispatching
 {
-    private VerticalArrangement PCPS_mainContainer;
-    private VerticalArrangement PCPS_leftSideSpacer;
-    private VerticalArrangement PCPS_headerArrangement;
-    private HorizontalArrangement PCPS_AddCustomerScreenBodyWithSpacer;
-    private VerticalArrangement PCPS_AddCustomerScreenBody;
-    private HorizontalArrangement PCPS_NameField;
-    private VerticalArrangement PCPS_NameArrangement;
-    private HorizontalArrangement PCPS_ContactField;
-    private VerticalArrangement PCPS_ContactArrangement;
-    private HorizontalArrangement PCPS_AddressField;
-    private VerticalArrangement PCPS_AddressArrangement;
-    private VerticalArrangement PCPS_LocateArrangement;
-    private HorizontalArrangement PCPS_GPSField;
-    private HorizontalArrangement PCPS_NotesField;
-    private Label PCPS_Title;
-    private Label PCPS_NameLabel;
-    private Label PCPS_ContactLabel;
-    private Label PCPS_AddressLabel;
-    private Label PCPS_GPSLabel;
-    private Label PCPS_NotesLabel;
-    private TextBox PCPS_FirstName;
-    private TextBox PCPS_LastName;
-    private TextBox PCPS_Phone;
-    private TextBox PCPS_Email;
-    private TextBox PCPS_AddressLineOne;
-    private TextBox PCPS_AddressLineTwo;
-    private TextBox PCPS_AddressLineThree;
-    private Button PCPS_AutoLocateButton;
-    private TextBox PCPS_GPSLocation;
-    private HorizontalArrangement PCPS_AddCustomerControlButtonArea;
-    private Button PCPS_CustomerControl_Save;
+    private VerticalArrangement mainContainer;
+    private VerticalArrangement leftSideSpacer;
+    private VerticalArrangement headerArrangement;
+    private HorizontalArrangement addCustomerScreenBodyWithSpacer;
+    private VerticalArrangement addCustomerScreenBody;
+    private HorizontalArrangement nameField;
+    private VerticalArrangement nameArrangement;
+    private HorizontalArrangement contactField;
+    private VerticalArrangement contactArrangement;
+    private HorizontalArrangement addressField;
+    private VerticalArrangement addressArrangement;
+    private VerticalArrangement locateArrangement;
+    private HorizontalArrangement GPSField;
+    private HorizontalArrangement notesField;
+    private Label title;
+    private Label nameLabel;
+    private Label contactLabel;
+    private Label addressLabel;
+    private Label GPSLabel;
+    private Label notesLabel;
+    private TextBox firstName;
+    private TextBox lastName;
+    private TextBox phone;
+    private TextBox email;
+    private TextBox addressLineOne;
+    private TextBox addressLineTwo;
+    private TextBox addressLineThree;
+    private Button autoLocateButton;
+    private TextBox GPSLocation;
+    private HorizontalArrangement addCustomerControlButtonArea;
+    private Button customerControl_Save;
 
 
     protected void $define()
     {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        PCPS_mainContainer = new VerticalArrangement(this);
-        PCPS_mainContainer.Width(getScreenWidth());
-        PCPS_mainContainer.Height(getScreenHeight());
-        PCPS_mainContainer.BackgroundColor(0xff99bbff);
+        mainContainer = new VerticalArrangement(this);
+        mainContainer.Width(getScreenWidth());
+        mainContainer.Height(getScreenHeight());
+        mainContainer.BackgroundColor(0xff99bbff);
 
-        PCPS_headerArrangement = new VerticalArrangement(PCPS_mainContainer);
-        PCPS_headerArrangement.Width((int)(getScreenWidth()));
-        PCPS_headerArrangement.HeightPercent(10);
-        PCPS_headerArrangement.AlignHorizontal(1);
-        PCPS_headerArrangement.AlignVertical(1);
+        headerArrangement = new VerticalArrangement(mainContainer);
+        headerArrangement.Width((int)(getScreenWidth()));
+        headerArrangement.HeightPercent(10);
+        headerArrangement.AlignHorizontal(1);
+        headerArrangement.AlignVertical(1);
 
-        PCPS_Title = new Label(PCPS_headerArrangement);
-        PCPS_Title.Text("Add Customer");
-        PCPS_Title.FontSize(20);
-        PCPS_Title.FontBold(true);
-        PCPS_Title.TextColor(0xffffffff);
-        PCPS_Title.Visible(true);
+        title = new Label(headerArrangement);
+        title.Text("Add Customer");
+        title.FontSize(20);
+        title.FontBold(true);
+        title.TextColor(0xffffffff);
+        title.Visible(true);
 
-        PCPS_AddCustomerScreenBodyWithSpacer = new HorizontalArrangement(PCPS_mainContainer);
-        PCPS_AddCustomerScreenBodyWithSpacer.Width((int)(getScreenWidth()));
-        PCPS_AddCustomerScreenBodyWithSpacer.Height((int)(getScreenHeight()));
+        addCustomerScreenBodyWithSpacer = new HorizontalArrangement(mainContainer);
+        addCustomerScreenBodyWithSpacer.Width((int)(getScreenWidth()));
+        addCustomerScreenBodyWithSpacer.Height((int)(getScreenHeight()));
 
         //spacer that keeps everything 5% from the left
-        PCPS_leftSideSpacer = new VerticalArrangement(PCPS_AddCustomerScreenBodyWithSpacer);
-        PCPS_leftSideSpacer.WidthPercent(10);
-        PCPS_leftSideSpacer.Height(getScreenHeight());
+        leftSideSpacer = new VerticalArrangement(addCustomerScreenBodyWithSpacer);
+        leftSideSpacer.WidthPercent(10);
+        leftSideSpacer.Height(getScreenHeight());
 
-        PCPS_AddCustomerScreenBody = new VerticalArrangement(PCPS_AddCustomerScreenBodyWithSpacer);
-        PCPS_AddCustomerScreenBody.WidthPercent(90);
-        PCPS_AddCustomerScreenBody.Height((int)(getScreenHeight()));
+        addCustomerScreenBody = new VerticalArrangement(addCustomerScreenBodyWithSpacer);
+        addCustomerScreenBody.WidthPercent(90);
+        addCustomerScreenBody.Height((int)(getScreenHeight()));
 
-        PCPS_NameField = new HorizontalArrangement(PCPS_AddCustomerScreenBody);
-        PCPS_NameField.WidthPercent(90);
-        PCPS_NameField.BackgroundColor(0xffe6f2ff);
+        nameField = new HorizontalArrangement(addCustomerScreenBody);
+        nameField.WidthPercent(90);
+        nameField.BackgroundColor(0xffe6f2ff);
 
-        PCPS_NameLabel = new Label(PCPS_NameField);
-        PCPS_NameLabel.HeightPercent(10);
-        PCPS_NameLabel.WidthPercent(30);
-        PCPS_NameLabel.TextColor(0xff000000);
-        PCPS_NameLabel.Visible(true);
-        PCPS_NameLabel.Text("Name:");
+        nameLabel = new Label(nameField);
+        nameLabel.HeightPercent(10);
+        nameLabel.WidthPercent(30);
+        nameLabel.TextColor(0xff000000);
+        nameLabel.Visible(true);
+        nameLabel.Text("Name:");
 
-        PCPS_NameArrangement = new VerticalArrangement(PCPS_NameField);
-        PCPS_NameArrangement.WidthPercent(60);
+        nameArrangement = new VerticalArrangement(nameField);
+        nameArrangement.WidthPercent(60);
 
-        PCPS_FirstName = new TextBox(PCPS_NameArrangement);
-        PCPS_FirstName.HeightPercent(10);
-        PCPS_FirstName.WidthPercent(60);
+        firstName = new TextBox(nameArrangement);
+        firstName.HeightPercent(10);
+        firstName.WidthPercent(60);
 
-        PCPS_LastName = new TextBox(PCPS_NameArrangement);
-        PCPS_LastName.HeightPercent(10);
-        PCPS_LastName.WidthPercent(60);
+        lastName = new TextBox(nameArrangement);
+        lastName.HeightPercent(10);
+        lastName.WidthPercent(60);
 
-        PCPS_ContactField = new HorizontalArrangement(PCPS_AddCustomerScreenBody);
-        PCPS_ContactField.WidthPercent(90);
-        PCPS_ContactField.BackgroundColor(0xffffffff);
+        contactField = new HorizontalArrangement(addCustomerScreenBody);
+        contactField.WidthPercent(90);
+        contactField.BackgroundColor(0xffffffff);
 
-        PCPS_ContactLabel = new Label(PCPS_ContactField);
-        PCPS_ContactLabel.HeightPercent(10);
-        PCPS_ContactLabel.WidthPercent(30);
-        PCPS_ContactLabel.TextColor(0xff000000);
-        PCPS_ContactLabel.Visible(true);
-        PCPS_ContactLabel.Text("Contact Details:");
+        contactLabel = new Label(contactField);
+        contactLabel.HeightPercent(10);
+        contactLabel.WidthPercent(30);
+        contactLabel.TextColor(0xff000000);
+        contactLabel.Visible(true);
+        contactLabel.Text("Contact Details:");
 
-        PCPS_ContactArrangement = new VerticalArrangement(PCPS_NameField);
-        PCPS_ContactArrangement.WidthPercent(60);
+        contactArrangement = new VerticalArrangement(nameField);
+        contactArrangement.WidthPercent(60);
 
-        PCPS_Phone = new TextBox(PCPS_ContactArrangement);
-        PCPS_Phone.HeightPercent(10);
-        PCPS_Phone.WidthPercent(60);
+        phone = new TextBox(contactArrangement);
+        phone.HeightPercent(10);
+        phone.WidthPercent(60);
 
-        PCPS_Email = new TextBox(PCPS_ContactArrangement);
-        PCPS_Email.HeightPercent(10);
-        PCPS_Email.WidthPercent(60);
+        email = new TextBox(contactArrangement);
+        email.HeightPercent(10);
+        email.WidthPercent(60);
 
-        PCPS_AddressField = new HorizontalArrangement(PCPS_AddCustomerScreenBody);
-        PCPS_AddressField.WidthPercent(90);
-        PCPS_AddressField.BackgroundColor(0xffe6f2ff);
+        addressField = new HorizontalArrangement(addCustomerScreenBody);
+        addressField.WidthPercent(90);
+        addressField.BackgroundColor(0xffe6f2ff);
 
-        PCPS_LocateArrangement = new VerticalArrangement(PCPS_AddressField);
-        PCPS_LocateArrangement.WidthPercent(30);
+        locateArrangement = new VerticalArrangement(addressField);
+        locateArrangement.WidthPercent(30);
 
-        PCPS_AddressLabel = new Label(PCPS_LocateArrangement);
-        PCPS_AddressLabel.HeightPercent(10);
-        PCPS_AddressLabel.WidthPercent(30);
-        PCPS_AddressLabel.TextColor(0xff000000);
-        PCPS_AddressLabel.Visible(true);
-        PCPS_AddressLabel.Text("Address:");
+        addressLabel = new Label(locateArrangement);
+        addressLabel.HeightPercent(10);
+        addressLabel.WidthPercent(30);
+        addressLabel.TextColor(0xff000000);
+        addressLabel.Visible(true);
+        addressLabel.Text("Address:");
 
-        PCPS_AutoLocateButton = new Button(PCPS_LocateArrangement);
-        PCPS_AutoLocateButton.HeightPercent(10);
-        PCPS_AutoLocateButton.Text("Auto Locate");
-        PCPS_AutoLocateButton.WidthPercent(25);
-        PCPS_AutoLocateButton.FontSize(10);
-        PCPS_AutoLocateButton.BackgroundColor(0xff004a99);
-        PCPS_AutoLocateButton.TextColor(0xffffffff);
+        autoLocateButton = new Button(locateArrangement);
+        autoLocateButton.HeightPercent(10);
+        autoLocateButton.Text("Auto Locate");
+        autoLocateButton.WidthPercent(25);
+        autoLocateButton.FontSize(10);
+        autoLocateButton.BackgroundColor(0xff004a99);
+        autoLocateButton.TextColor(0xffffffff);
 
-        PCPS_AddressArrangement = new VerticalArrangement(PCPS_AddressField);
-        PCPS_AddressArrangement.WidthPercent(60);
+        addressArrangement = new VerticalArrangement(addressField);
+        addressArrangement.WidthPercent(60);
 
-        PCPS_AddressLineOne = new TextBox(PCPS_AddressArrangement);
-        PCPS_AddressLineOne.HeightPercent(10);
-        PCPS_AddressLineOne.WidthPercent(60);
+        addressLineOne = new TextBox(addressArrangement);
+        addressLineOne.HeightPercent(10);
+        addressLineOne.WidthPercent(60);
 
-        PCPS_AddressLineTwo = new TextBox(PCPS_AddressArrangement);
-        PCPS_AddressLineTwo.HeightPercent(10);
-        PCPS_AddressLineTwo.WidthPercent(60);
+        addressLineTwo = new TextBox(addressArrangement);
+        addressLineTwo.HeightPercent(10);
+        addressLineTwo.WidthPercent(60);
 
-        PCPS_AddressLineThree = new TextBox(PCPS_AddressArrangement);
-        PCPS_AddressLineThree.HeightPercent(10);
-        PCPS_AddressLineThree.WidthPercent(60);
+        addressLineThree = new TextBox(addressArrangement);
+        addressLineThree.HeightPercent(10);
+        addressLineThree.WidthPercent(60);
 
-        PCPS_GPSField = new HorizontalArrangement(PCPS_AddCustomerScreenBody);
-        PCPS_GPSField.WidthPercent(90);
-        PCPS_GPSField.BackgroundColor(0xffffffff);
+        GPSField = new HorizontalArrangement(addCustomerScreenBody);
+        GPSField.WidthPercent(90);
+        GPSField.BackgroundColor(0xffffffff);
 
-        PCPS_GPSLabel = new Label(PCPS_GPSField);
-        PCPS_GPSLabel.HeightPercent(10);
-        PCPS_GPSLabel.WidthPercent(30);
-        PCPS_GPSLabel.TextColor(0xff000000);
-        PCPS_GPSLabel.Visible(true);
-        PCPS_GPSLabel.Text("GPS:");
+        GPSLabel = new Label(GPSField);
+        GPSLabel.HeightPercent(10);
+        GPSLabel.WidthPercent(30);
+        GPSLabel.TextColor(0xff000000);
+        GPSLabel.Visible(true);
+        GPSLabel.Text("GPS:");
 
-        PCPS_GPSLocation = new TextBox(PCPS_GPSField);
-        PCPS_GPSLocation.HeightPercent(10);
-        PCPS_GPSLocation.WidthPercent(60);
-        PCPS_GPSLocation.BackgroundColor(0xffffffff);
-        PCPS_GPSLocation.Enabled(false);
+        GPSLocation = new TextBox(GPSField);
+        GPSLocation.HeightPercent(10);
+        GPSLocation.WidthPercent(60);
+        GPSLocation.BackgroundColor(0xffffffff);
+        GPSLocation.Enabled(false);
 
-        PCPS_NotesField = new HorizontalArrangement(PCPS_AddCustomerScreenBody);
-        PCPS_NotesField.WidthPercent(90);
-        PCPS_NotesField.BackgroundColor(0xffe6f2ff);
+        notesField = new HorizontalArrangement(addCustomerScreenBody);
+        notesField.WidthPercent(90);
+        notesField.BackgroundColor(0xffe6f2ff);
 
-        PCPS_NotesLabel = new Label(PCPS_NotesField);
-        PCPS_NotesLabel.HeightPercent(10);
-        PCPS_NotesLabel.WidthPercent(30);
-        PCPS_NotesLabel.TextColor(0xff000000);
-        PCPS_NotesLabel.Visible(true);
-        PCPS_NotesLabel.Text("Notes:");
+        notesLabel = new Label(notesField);
+        notesLabel.HeightPercent(10);
+        notesLabel.WidthPercent(30);
+        notesLabel.TextColor(0xff000000);
+        notesLabel.Visible(true);
+        notesLabel.Text("Notes:");
 
-        PCPS_AddCustomerControlButtonArea = new HorizontalArrangement(PCPS_AddCustomerScreenBody);
-        PCPS_AddCustomerControlButtonArea.WidthPercent(90);
-        PCPS_AddCustomerControlButtonArea.BackgroundColor(0xff99bbff);
-        PCPS_AddCustomerControlButtonArea.HeightPercent(10);
+        addCustomerControlButtonArea = new HorizontalArrangement(addCustomerScreenBody);
+        addCustomerControlButtonArea.WidthPercent(90);
+        addCustomerControlButtonArea.BackgroundColor(0xff99bbff);
+        addCustomerControlButtonArea.HeightPercent(10);
 
-        PCPS_CustomerControl_Save = new Button(PCPS_AddCustomerControlButtonArea);
-        PCPS_CustomerControl_Save.WidthPercent(50);
-        PCPS_CustomerControl_Save.Text("Save");
-        PCPS_CustomerControl_Save.BackgroundColor(0xff004a99);
-        PCPS_CustomerControl_Save.TextColor(0xffffffff);
+        customerControl_Save = new Button(addCustomerControlButtonArea);
+        customerControl_Save.WidthPercent(50);
+        customerControl_Save.Text("Save");
+        customerControl_Save.BackgroundColor(0xff004a99);
+        customerControl_Save.TextColor(0xffffffff);
     }
 
     public static int getScreenWidth()

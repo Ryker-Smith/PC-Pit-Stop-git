@@ -16,142 +16,142 @@ import com.google.appinventor.components.runtime.VerticalArrangement;
 
 public class administratorHome_screen09 extends Form implements HandlesEventDispatching
 {
-    private VerticalArrangement PCPS_mainContainer;
-    private VerticalArrangement PCPS_leftSideSpacer;
-    private VerticalArrangement PCPS_headerArrangement;
-    private HorizontalArrangement PCPS_AdminScreenBodyWithSpacer;
-    private VerticalArrangement PCPS_AdminScreenBody;
-    private Label PCPS_Title;
-    private VerticalArrangement PCPS_CustomerListArrangement;
-    private VerticalArrangement PCPS_JobListArrangement;
-    private VerticalArrangement PCPS_ActionsListArrangement;
-    private VerticalArrangement PCPS_TechniciansListArrangement;
-    private VerticalArrangement PCPS_UserListArrangement;
-    private Button PCPS_CustomerList;
-    private Button PCPS_JobList;
-    private Button PCPS_ActionsList;
-    private Button PCPS_TechniciansList;
-    private Button PCPS_UserList;
+    private VerticalArrangement mainContainer;
+    private VerticalArrangement leftSideSpacer;
+    private VerticalArrangement headerArrangement;
+    private HorizontalArrangement adminScreenBodyWithSpacer;
+    private VerticalArrangement adminScreenBody;
+    private Label title;
+    private VerticalArrangement customerListArrangement;
+    private VerticalArrangement jobListArrangement;
+    private VerticalArrangement actionsListArrangement;
+    private VerticalArrangement techniciansListArrangement;
+    private VerticalArrangement userListArrangement;
+    private Button customerList;
+    private Button jobList;
+    private Button actionsList;
+    private Button techniciansList;
+    private Button userList;
 
 
 
     protected void $define()
     {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        PCPS_mainContainer = new VerticalArrangement(this);
-        PCPS_mainContainer.Width(getScreenWidth());
-        PCPS_mainContainer.Height(getScreenHeight());
-        PCPS_mainContainer.BackgroundColor(0xff99bbff);
+        mainContainer = new VerticalArrangement(this);
+        mainContainer.Width(getScreenWidth());
+        mainContainer.Height(getScreenHeight());
+        mainContainer.BackgroundColor(0xff99bbff);
 
-        PCPS_headerArrangement = new VerticalArrangement(PCPS_mainContainer);
-        PCPS_headerArrangement.Width((int)(getScreenWidth()));
-        PCPS_headerArrangement.HeightPercent(10);
-        PCPS_headerArrangement.AlignHorizontal(1);
-        PCPS_headerArrangement.AlignVertical(1);
+        headerArrangement = new VerticalArrangement(mainContainer);
+        headerArrangement.Width((int)(getScreenWidth()));
+        headerArrangement.HeightPercent(10);
+        headerArrangement.AlignHorizontal(1);
+        headerArrangement.AlignVertical(1);
 
-        PCPS_Title = new Label(PCPS_headerArrangement);
-        PCPS_Title.Text("Admin");
-        PCPS_Title.FontSize(20);
-        PCPS_Title.FontBold(true);
-        PCPS_Title.TextColor(0xffffffff);
-        PCPS_Title.Visible(true);
+        title = new Label(headerArrangement);
+        title.Text("Admin");
+        title.FontSize(20);
+        title.FontBold(true);
+        title.TextColor(0xffffffff);
+        title.Visible(true);
 
-        PCPS_AdminScreenBodyWithSpacer = new HorizontalArrangement(PCPS_mainContainer);
-        PCPS_AdminScreenBodyWithSpacer.Width((int)(getScreenWidth()));
-        PCPS_AdminScreenBodyWithSpacer.Height((int)(getScreenHeight()));
+        adminScreenBodyWithSpacer = new HorizontalArrangement(mainContainer);
+        adminScreenBodyWithSpacer.Width((int)(getScreenWidth()));
+        adminScreenBodyWithSpacer.Height((int)(getScreenHeight()));
 
         //spacer that keeps everything 5% from the left
-        PCPS_leftSideSpacer = new VerticalArrangement(PCPS_AdminScreenBodyWithSpacer);
-        PCPS_leftSideSpacer.WidthPercent(10);
-        PCPS_leftSideSpacer.Height(getScreenHeight());
+        leftSideSpacer = new VerticalArrangement(adminScreenBodyWithSpacer);
+        leftSideSpacer.WidthPercent(10);
+        leftSideSpacer.Height(getScreenHeight());
 
-        PCPS_AdminScreenBody = new VerticalArrangement(PCPS_AdminScreenBodyWithSpacer);
-        PCPS_AdminScreenBody.Width((int)(getScreenWidth()));
-        PCPS_AdminScreenBody.Height((int)(getScreenHeight()));
+        adminScreenBody = new VerticalArrangement(adminScreenBodyWithSpacer);
+        adminScreenBody.Width((int)(getScreenWidth()));
+        adminScreenBody.Height((int)(getScreenHeight()));
 
-        PCPS_CustomerListArrangement = new VerticalArrangement(PCPS_AdminScreenBody);
-        PCPS_CustomerListArrangement.BackgroundColor(0xff99bbff);
-        PCPS_CustomerListArrangement.HeightPercent(20);
+        customerListArrangement = new VerticalArrangement(adminScreenBody);
+        customerListArrangement.BackgroundColor(0xff99bbff);
+        customerListArrangement.HeightPercent(20);
 
-        PCPS_JobListArrangement = new VerticalArrangement(PCPS_AdminScreenBody);
-        PCPS_JobListArrangement.BackgroundColor(0xff99bbff);
-        PCPS_JobListArrangement.HeightPercent(20);
+        jobListArrangement = new VerticalArrangement(adminScreenBody);
+        jobListArrangement.BackgroundColor(0xff99bbff);
+        jobListArrangement.HeightPercent(20);
 
-        PCPS_ActionsListArrangement = new VerticalArrangement(PCPS_AdminScreenBody);
-        PCPS_ActionsListArrangement.BackgroundColor(0xff99bbff);
-        PCPS_ActionsListArrangement.HeightPercent(20);
+        actionsListArrangement = new VerticalArrangement(adminScreenBody);
+        actionsListArrangement.BackgroundColor(0xff99bbff);
+        actionsListArrangement.HeightPercent(20);
 
-        PCPS_TechniciansListArrangement = new VerticalArrangement(PCPS_AdminScreenBody);
-        PCPS_TechniciansListArrangement.BackgroundColor(0xff99bbff);
-        PCPS_TechniciansListArrangement.HeightPercent(20);
+        techniciansListArrangement = new VerticalArrangement(adminScreenBody);
+        techniciansListArrangement.BackgroundColor(0xff99bbff);
+        techniciansListArrangement.HeightPercent(20);
 
-        PCPS_UserListArrangement = new VerticalArrangement(PCPS_AdminScreenBody);
-        PCPS_UserListArrangement.BackgroundColor(0xff99bbff);
-        PCPS_UserListArrangement.HeightPercent(20);
+        userListArrangement = new VerticalArrangement(adminScreenBody);
+        userListArrangement.BackgroundColor(0xff99bbff);
+        userListArrangement.HeightPercent(20);
 
-        PCPS_CustomerList = new Button(PCPS_CustomerListArrangement);
-        PCPS_CustomerList.HeightPercent(15);
-        PCPS_CustomerList.WidthPercent(90);
-        PCPS_CustomerList.Text("Customer List");
-        PCPS_CustomerList.BackgroundColor(0xff004a99);
-        PCPS_CustomerList.TextColor(0xffffffff);
-        PCPS_CustomerList.FontSize(14);
+        customerList = new Button(customerListArrangement);
+        customerList.HeightPercent(15);
+        customerList.WidthPercent(90);
+        customerList.Text("Customer List");
+        customerList.BackgroundColor(0xff004a99);
+        customerList.TextColor(0xffffffff);
+        customerList.FontSize(14);
 
-        PCPS_JobList = new Button(PCPS_JobListArrangement);
-        PCPS_JobList.HeightPercent(15);
-        PCPS_JobList.WidthPercent(90);
-        PCPS_JobList.Text("Job List");
-        PCPS_JobList.BackgroundColor(0xff004a99);
-        PCPS_JobList.TextColor(0xffffffff);
-        PCPS_JobList.FontSize(14);
+        jobList = new Button(jobListArrangement);
+        jobList.HeightPercent(15);
+        jobList.WidthPercent(90);
+        jobList.Text("Job List");
+        jobList.BackgroundColor(0xff004a99);
+        jobList.TextColor(0xffffffff);
+        jobList.FontSize(14);
 
-        PCPS_ActionsList = new Button(PCPS_ActionsListArrangement);
-        PCPS_ActionsList.HeightPercent(15);
-        PCPS_ActionsList.WidthPercent(90);
-        PCPS_ActionsList.Text("Actions List");
-        PCPS_ActionsList.BackgroundColor(0xff004a99);
-        PCPS_ActionsList.TextColor(0xffffffff);
-        PCPS_ActionsList.FontSize(14);
+        actionsList = new Button(actionsListArrangement);
+        actionsList.HeightPercent(15);
+        actionsList.WidthPercent(90);
+        actionsList.Text("Actions List");
+        actionsList.BackgroundColor(0xff004a99);
+        actionsList.TextColor(0xffffffff);
+        actionsList.FontSize(14);
 
-        PCPS_TechniciansList = new Button(PCPS_TechniciansListArrangement);
-        PCPS_TechniciansList.HeightPercent(15);
-        PCPS_TechniciansList.WidthPercent(90);
-        PCPS_TechniciansList.Text("Technicians List");
-        PCPS_TechniciansList.BackgroundColor(0xff004a99);
-        PCPS_TechniciansList.TextColor(0xffffffff);
-        PCPS_TechniciansList.FontSize(14);
+        techniciansList = new Button(techniciansListArrangement);
+        techniciansList.HeightPercent(15);
+        techniciansList.WidthPercent(90);
+        techniciansList.Text("Technicians List");
+        techniciansList.BackgroundColor(0xff004a99);
+        techniciansList.TextColor(0xffffffff);
+        techniciansList.FontSize(14);
 
-        PCPS_UserList = new Button(PCPS_UserListArrangement);
-        PCPS_UserList.HeightPercent(15);
-        PCPS_UserList.WidthPercent(90);
-        PCPS_UserList.Text("User List");
-        PCPS_UserList.BackgroundColor(0xff004a99);
-        PCPS_UserList.TextColor(0xffffffff);
-        PCPS_UserList.FontSize(14);
+        userList = new Button(userListArrangement);
+        userList.HeightPercent(15);
+        userList.WidthPercent(90);
+        userList.Text("User List");
+        userList.BackgroundColor(0xff004a99);
+        userList.TextColor(0xffffffff);
+        userList.FontSize(14);
 
-        EventDispatcher.registerEventForDelegation(this, "PCPS_CustomerList", "Click");
-        EventDispatcher.registerEventForDelegation(this, "PCPS_UserList", "Click");
-        EventDispatcher.registerEventForDelegation(this, "PCPS_TechniciansList", "Click");
+        EventDispatcher.registerEventForDelegation(this, "customerList", "Click");
+        EventDispatcher.registerEventForDelegation(this, "userList", "Click");
+        EventDispatcher.registerEventForDelegation(this, "techniciansList", "Click");
     }
 
     public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params)
     {
         //if login button clicked
-        if (component.equals(PCPS_CustomerList) && eventName.equals("Click"))
+        if (component.equals(customerList) && eventName.equals("Click"))
         {
-            PCPS_CustomerListClicked();
+            CustomerListClicked();
             return true;
         }
 
-        else if (component.equals(PCPS_UserList) && eventName.equals("Click"))
+        else if (component.equals(userList) && eventName.equals("Click"))
         {
-            PCPS_UserListClicked();
+            UserListClicked();
             return true;
         }
 
-        else if (component.equals(PCPS_TechniciansList) && eventName.equals("Click"))
+        else if (component.equals(techniciansList) && eventName.equals("Click"))
         {
-            PCPS_UserListClicked();
+            UserListClicked();
             return true;
         }
 
@@ -161,17 +161,17 @@ public class administratorHome_screen09 extends Form implements HandlesEventDisp
         }
     }
 
-    public void PCPS_CustomerListClicked()
+    public void CustomerListClicked()
     {
-        Intent PCPS_CustomerListIntent = new Intent(administratorHome_screen09.this, customerAddEdit_screen04.class);
-        startActivity(PCPS_CustomerListIntent);
+        Intent CustomerListIntent = new Intent(administratorHome_screen09.this, customerAddEdit_screen04.class);
+        startActivity(CustomerListIntent);
         finish();
     }
 
-    public void PCPS_UserListClicked()
+    public void UserListClicked()
     {
-        Intent PCPS_UserListIntent = new Intent(administratorHome_screen09.this, userAddEdit_screen10.class);
-        startActivity(PCPS_UserListIntent);
+        Intent UserListIntent = new Intent(administratorHome_screen09.this, userAddEdit_screen10.class);
+        startActivity(UserListIntent);
         finish();
     }
 

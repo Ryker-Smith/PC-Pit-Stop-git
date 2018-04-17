@@ -25,7 +25,7 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
     //all objects/variables named with shortcut of PC_PitStop -> PCPS
     private TextBox username; //username field for login
     private PasswordTextBox password; //password field
-    private Button PCPS_loginButton;
+    private Button loginButton;
     private VerticalArrangement mainContainer;
     private VerticalArrangement leftSideSpacerUpper;
     private VerticalArrangement leftSideSpacerLower;
@@ -43,7 +43,7 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
     private Button adminButton;
     private com.google.appinventor.components.runtime.Canvas logoCanvas;
     private com.google.appinventor.components.runtime.Canvas logoSpacer;
-    private Label PCPS_Title;
+    private Label Title;
     private Label usernameLabel;
     private Label passwordLabel;
     private Web loginWeb;
@@ -293,30 +293,30 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
     {
         if(role == "Customer")
         {
-            Intent PCPS_customerIntent = new Intent(startingLogin_screen01.this, customerHome_screen07.class);
+            Intent customerIntent = new Intent(startingLogin_screen01.this, customerHome_screen07.class);
             finish();
-            startActivity(PCPS_customerIntent);
+            startActivity(customerIntent);
         }
 
         else if(role == "Tech")
         {
-            Intent PCPS_techIntent = new Intent(startingLogin_screen01.this, technicianHome_screen05.class);
+            Intent techIntent = new Intent(startingLogin_screen01.this, technicianHome_screen05.class);
             finish();
-            startActivity(PCPS_techIntent);
+            startActivity(techIntent);
         }
 
         else if (role == "Office")
         {
-            Intent PCPS_officeIntent = new Intent(startingLogin_screen01.this, operatorHome_screen02.class);
+            Intent officeIntent = new Intent(startingLogin_screen01.this, operatorHome_screen02.class);
             finish();
-            startActivity(PCPS_officeIntent);
+            startActivity(officeIntent);
         }
 
         else if (role == "Admin")
         {
-            Intent PCPS_adminIntent = new Intent(startingLogin_screen01.this, administratorHome_screen09.class);
+            Intent adminIntent = new Intent(startingLogin_screen01.this, administratorHome_screen09.class);
             finish();
-            startActivity(PCPS_adminIntent);
+            startActivity(adminIntent);
         }
     }
 

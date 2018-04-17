@@ -18,167 +18,167 @@ import com.google.appinventor.components.runtime.VerticalScrollArrangement;
 
 public class operatorHome_screen02 extends Form implements HandlesEventDispatching
 {
-    private VerticalArrangement PCPS_mainContainer;
-    private VerticalArrangement PCPS_leftSideSpacer;
-    private VerticalArrangement PCPS_headerArrangement;
-    private HorizontalArrangement PCPS_OperatorScreenBodyWithSpacer;
-    private VerticalArrangement PCPS_OperatorScreenBody;
-    private HorizontalArrangement PCPS_JobsControlButtonArea;
-    private Button PCPS_JobsControl_Add;
-    private Button PCPS_JobsControl_Edit;
-    private HorizontalArrangement PCPS_CustomersControlButtonArea;
-    private Button PCPS_CustomerControl_Add;
-    private Button PCPS_CustomerControl_Edit;
-    private Label PCPS_Title;
-    private Label PCPS_JobsLabel;
-    private Label PCPS_CustomersLabel;
-    private VerticalScrollArrangement PCPS_Jobs;
-    private VerticalScrollArrangement PCPS_Customers;
+    private VerticalArrangement mainContainer;
+    private VerticalArrangement leftSideSpacer;
+    private VerticalArrangement headerArrangement;
+    private HorizontalArrangement operatorScreenBodyWithSpacer;
+    private VerticalArrangement operatorScreenBody;
+    private HorizontalArrangement jobsControlButtonArea;
+    private Button jobsControlAdd;
+    private Button jobsControlEdit;
+    private HorizontalArrangement customersControlButtonArea;
+    private Button customerControlAdd;
+    private Button customerControlEdit;
+    private Label title;
+    private Label jobsLabel;
+    private Label customersLabel;
+    private VerticalScrollArrangement jobs;
+    private VerticalScrollArrangement customers;
     //placeholders below---v
-    private TextBox JobsOne;
-    private TextBox JobsTwo;
-    private TextBox JobsThree;
-    private TextBox CustomersOne;
-    private TextBox CustomersTwo;
-    private TextBox CustomersThree;
+    private TextBox jobsOne;
+    private TextBox jobsTwo;
+    private TextBox jobsThree;
+    private TextBox customersOne;
+    private TextBox customersTwo;
+    private TextBox customersThree;
 
 
     protected void $define()
     {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        PCPS_mainContainer = new VerticalArrangement(this);
-        PCPS_mainContainer.Width(getScreenWidth());
-        PCPS_mainContainer.Height(getScreenHeight());
-        PCPS_mainContainer.BackgroundColor(0xff99bbff);
+        mainContainer = new VerticalArrangement(this);
+        mainContainer.Width(getScreenWidth());
+        mainContainer.Height(getScreenHeight());
+        mainContainer.BackgroundColor(0xff99bbff);
 
-        PCPS_headerArrangement = new VerticalArrangement(PCPS_mainContainer);
-        PCPS_headerArrangement.Width((int)(getScreenWidth()));
-        PCPS_headerArrangement.HeightPercent(10);
-        PCPS_headerArrangement.AlignHorizontal(1);
-        PCPS_headerArrangement.AlignVertical(1);
+        headerArrangement = new VerticalArrangement(mainContainer);
+        headerArrangement.Width((int)(getScreenWidth()));
+        headerArrangement.HeightPercent(10);
+        headerArrangement.AlignHorizontal(1);
+        headerArrangement.AlignVertical(1);
 
-        PCPS_Title = new Label(PCPS_headerArrangement);
-        PCPS_Title.Text("Operator");
-        PCPS_Title.FontSize(20);
-        PCPS_Title.FontBold(true);
-        PCPS_Title.TextColor(0xffffffff);
-        PCPS_Title.Visible(true);
+        title = new Label(headerArrangement);
+        title.Text("Operator");
+        title.FontSize(20);
+        title.FontBold(true);
+        title.TextColor(0xffffffff);
+        title.Visible(true);
 
-        PCPS_OperatorScreenBodyWithSpacer = new HorizontalArrangement(PCPS_mainContainer);
-        PCPS_OperatorScreenBodyWithSpacer.Width((int)(getScreenWidth()));
-        PCPS_OperatorScreenBodyWithSpacer.Height((int)(getScreenHeight()));
+        operatorScreenBodyWithSpacer = new HorizontalArrangement(mainContainer);
+        operatorScreenBodyWithSpacer.Width((int)(getScreenWidth()));
+        operatorScreenBodyWithSpacer.Height((int)(getScreenHeight()));
 
         //spacer that keeps everything 5% from the left
-        PCPS_leftSideSpacer = new VerticalArrangement(PCPS_OperatorScreenBodyWithSpacer);
-        PCPS_leftSideSpacer.WidthPercent(10);
-        PCPS_leftSideSpacer.Height(getScreenHeight());
+        leftSideSpacer = new VerticalArrangement(operatorScreenBodyWithSpacer);
+        leftSideSpacer.WidthPercent(10);
+        leftSideSpacer.Height(getScreenHeight());
 
-        PCPS_OperatorScreenBody = new VerticalArrangement(PCPS_OperatorScreenBodyWithSpacer);
-        PCPS_OperatorScreenBody.Width((int)(getScreenWidth()));
-        PCPS_OperatorScreenBody.Height((int)(getScreenHeight()));
+        operatorScreenBody = new VerticalArrangement(operatorScreenBodyWithSpacer);
+        operatorScreenBody.Width((int)(getScreenWidth()));
+        operatorScreenBody.Height((int)(getScreenHeight()));
 
-        PCPS_JobsLabel = new Label(PCPS_OperatorScreenBody);
-        PCPS_JobsLabel.FontSize(20);
-        PCPS_JobsLabel.TextColor(0xff000000);
-        PCPS_JobsLabel.Visible(true);
-        PCPS_JobsLabel.Text("Jobs:");
+        jobsLabel = new Label(operatorScreenBody);
+        jobsLabel.FontSize(20);
+        jobsLabel.TextColor(0xff000000);
+        jobsLabel.Visible(true);
+        jobsLabel.Text("jobs:");
 
-        PCPS_Jobs = new VerticalScrollArrangement(PCPS_OperatorScreenBody);
-        PCPS_Jobs.HeightPercent(25);
-        PCPS_Jobs.WidthPercent(90);
-        PCPS_Jobs.BackgroundColor(0xffffffff);
+        jobs = new VerticalScrollArrangement(operatorScreenBody);
+        jobs.HeightPercent(25);
+        jobs.WidthPercent(90);
+        jobs.BackgroundColor(0xffffffff);
 
-        JobsOne =new TextBox(PCPS_Jobs);
-        JobsOne.HeightPercent(10);
-        JobsOne.Text("This is detail one");
-        JobsOne.Enabled(false);
+        jobsOne =new TextBox(jobs);
+        jobsOne.HeightPercent(10);
+        jobsOne.Text("This is detail one");
+        jobsOne.Enabled(false);
 
-        JobsTwo =new TextBox(PCPS_Jobs);
-        JobsTwo.HeightPercent(10);
-        JobsTwo.Text("This is detail two");
-        JobsTwo.Enabled(false);
+        jobsTwo =new TextBox(jobs);
+        jobsTwo.HeightPercent(10);
+        jobsTwo.Text("This is detail two");
+        jobsTwo.Enabled(false);
 
-        JobsThree =new TextBox(PCPS_Jobs);
-        JobsThree.HeightPercent(10);
-        JobsThree.Text("This is detail three");
-        JobsThree.Enabled(false);
+        jobsThree =new TextBox(jobs);
+        jobsThree.HeightPercent(10);
+        jobsThree.Text("This is detail three");
+        jobsThree.Enabled(false);
 
-        PCPS_JobsControlButtonArea = new HorizontalArrangement(PCPS_OperatorScreenBody);
-        PCPS_JobsControlButtonArea.WidthPercent(90);
-        PCPS_JobsControlButtonArea.BackgroundColor(0xff99bbff);
-        PCPS_JobsControlButtonArea.HeightPercent(10);
+        jobsControlButtonArea = new HorizontalArrangement(operatorScreenBody);
+        jobsControlButtonArea.WidthPercent(90);
+        jobsControlButtonArea.BackgroundColor(0xff99bbff);
+        jobsControlButtonArea.HeightPercent(10);
 
-        PCPS_JobsControl_Add = new Button(PCPS_JobsControlButtonArea);
-        PCPS_JobsControl_Add.WidthPercent(50);
-        PCPS_JobsControl_Add.Text("Add");
-        PCPS_JobsControl_Add.BackgroundColor(0xff004a99);
-        PCPS_JobsControl_Add.TextColor(0xffffffff);
+        jobsControlAdd = new Button(jobsControlButtonArea);
+        jobsControlAdd.WidthPercent(50);
+        jobsControlAdd.Text("Add");
+        jobsControlAdd.BackgroundColor(0xff004a99);
+        jobsControlAdd.TextColor(0xffffffff);
 
-        PCPS_JobsControl_Edit = new Button(PCPS_JobsControlButtonArea);
-        PCPS_JobsControl_Edit.WidthPercent(50);
-        PCPS_JobsControl_Edit.Text("Edit");
-        PCPS_JobsControl_Edit.BackgroundColor(0xff004a99);
-        PCPS_JobsControl_Edit.TextColor(0xffffffff);
+        jobsControlEdit = new Button(jobsControlButtonArea);
+        jobsControlEdit.WidthPercent(50);
+        jobsControlEdit.Text("Edit");
+        jobsControlEdit.BackgroundColor(0xff004a99);
+        jobsControlEdit.TextColor(0xffffffff);
 
-        PCPS_CustomersLabel = new Label(PCPS_OperatorScreenBody);
-        PCPS_CustomersLabel.FontSize(20);
-        PCPS_CustomersLabel.TextColor(0xff000000);
-        PCPS_CustomersLabel.Visible(true);
-        PCPS_CustomersLabel.Text("Customers:");
+        customersLabel = new Label(operatorScreenBody);
+        customersLabel.FontSize(20);
+        customersLabel.TextColor(0xff000000);
+        customersLabel.Visible(true);
+        customersLabel.Text("customers:");
 
-        PCPS_Customers = new VerticalScrollArrangement(PCPS_OperatorScreenBody);
-        PCPS_Customers.HeightPercent(25);
-        PCPS_Customers.WidthPercent(90);
-        PCPS_Customers.BackgroundColor(0xffffffff);
+        customers = new VerticalScrollArrangement(operatorScreenBody);
+        customers.HeightPercent(25);
+        customers.WidthPercent(90);
+        customers.BackgroundColor(0xffffffff);
 
-        CustomersOne =new TextBox(PCPS_Customers);
-        CustomersOne.HeightPercent(10);
-        CustomersOne.Text("This is detail one");
-        CustomersOne.Enabled(false);
+        customersOne =new TextBox(customers);
+        customersOne.HeightPercent(10);
+        customersOne.Text("This is detail one");
+        customersOne.Enabled(false);
 
-        CustomersTwo =new TextBox(PCPS_Customers);
-        CustomersTwo.HeightPercent(10);
-        CustomersTwo.Text("This is detail two");
-        CustomersTwo.Enabled(false);
+        customersTwo =new TextBox(customers);
+        customersTwo.HeightPercent(10);
+        customersTwo.Text("This is detail two");
+        customersTwo.Enabled(false);
 
-        CustomersThree =new TextBox(PCPS_Customers);
-        CustomersThree.HeightPercent(10);
-        CustomersThree.Text("This is detail three");
-        CustomersThree.Enabled(false);
+        customersThree =new TextBox(customers);
+        customersThree.HeightPercent(10);
+        customersThree.Text("This is detail three");
+        customersThree.Enabled(false);
 
-        PCPS_CustomersControlButtonArea = new HorizontalArrangement(PCPS_OperatorScreenBody);
-        PCPS_CustomersControlButtonArea.WidthPercent(90);
-        PCPS_CustomersControlButtonArea.BackgroundColor(0xff99bbff);
-        PCPS_CustomersControlButtonArea.HeightPercent(10);
+        customersControlButtonArea = new HorizontalArrangement(operatorScreenBody);
+        customersControlButtonArea.WidthPercent(90);
+        customersControlButtonArea.BackgroundColor(0xff99bbff);
+        customersControlButtonArea.HeightPercent(10);
 
-        PCPS_CustomerControl_Add = new Button(PCPS_CustomersControlButtonArea);
-        PCPS_CustomerControl_Add.WidthPercent(50);
-        PCPS_CustomerControl_Add.Text("Add");
-        PCPS_CustomerControl_Add.BackgroundColor(0xff004a99);
-        PCPS_CustomerControl_Add.TextColor(0xffffffff);
+        customerControlAdd = new Button(customersControlButtonArea);
+        customerControlAdd.WidthPercent(50);
+        customerControlAdd.Text("Add");
+        customerControlAdd.BackgroundColor(0xff004a99);
+        customerControlAdd.TextColor(0xffffffff);
 
-        PCPS_CustomerControl_Edit = new Button(PCPS_CustomersControlButtonArea);
-        PCPS_CustomerControl_Edit.WidthPercent(50);
-        PCPS_CustomerControl_Edit.Text("Edit");
-        PCPS_CustomerControl_Edit.BackgroundColor(0xff004a99);
-        PCPS_CustomerControl_Edit.TextColor(0xffffffff);
+        customerControlEdit = new Button(customersControlButtonArea);
+        customerControlEdit.WidthPercent(50);
+        customerControlEdit.Text("Edit");
+        customerControlEdit.BackgroundColor(0xff004a99);
+        customerControlEdit.TextColor(0xffffffff);
 
-        EventDispatcher.registerEventForDelegation(this, "PCPS_JobsControl_Add", "Click");
-        EventDispatcher.registerEventForDelegation(this, "PCPS_CustomerControl_Add", "Click");
+        EventDispatcher.registerEventForDelegation(this, "jobsControlAdd", "Click");
+        EventDispatcher.registerEventForDelegation(this, "customerControlAdd", "Click");
     }
 
     public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params)
     {
         //if login button clicked
-        if (component.equals(PCPS_JobsControl_Add) && eventName.equals("Click"))
+        if (component.equals(jobsControlAdd) && eventName.equals("Click"))
         {
-            PCPS_AddJobButtonClicked();
+            addJobButtonClicked();
             return true;
         }
 
-        else if (component.equals(PCPS_JobsControl_Add) && eventName.equals("Click"))
+        else if (component.equals(jobsControlAdd) && eventName.equals("Click"))
         {
-            PCPS_AddCustomerButtonClicked();
+            addCustomerButtonClicked();
             return true;
         }
 
@@ -188,17 +188,17 @@ public class operatorHome_screen02 extends Form implements HandlesEventDispatchi
         }
     }
 
-    public void PCPS_AddJobButtonClicked()
+    public void addJobButtonClicked()
     {
-        Intent PCPS_AddJobIntent = new Intent(operatorHome_screen02.this, jobAddEdit_screen03.class);
-        startActivity(PCPS_AddJobIntent);
+        Intent AddJobIntent = new Intent(operatorHome_screen02.this, jobAddEdit_screen03.class);
+        startActivity(AddJobIntent);
         finish();
     }
 
-    public void PCPS_AddCustomerButtonClicked()
+    public void addCustomerButtonClicked()
     {
-        Intent PCPS_AddJobIntent = new Intent(operatorHome_screen02.this, customerAddEdit_screen04.class);
-        startActivity(PCPS_AddJobIntent);
+        Intent AddJobIntent = new Intent(operatorHome_screen02.this, customerAddEdit_screen04.class);
+        startActivity(AddJobIntent);
         finish();
     }
 
