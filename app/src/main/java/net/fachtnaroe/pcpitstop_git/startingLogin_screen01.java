@@ -54,6 +54,8 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
     private Label loginTypeLineOne;
     private Label loginTypeLineTwo;
 
+    String baseURL = "https://fachtnaroe.net/pcpitstop-2018?";
+
     protected void $define()
     {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -220,14 +222,15 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
     //method called when button is clicked
     public void customerButtonClicked()
     {
-        loginWeb.Url("https://fachtnaroe.net/pcpitstop-2018-test?cmd=login&user=" + username.Text() + "&pass=" + password.Text());
+
+        loginWeb.Url(baseURL + "cmd=login&user=" + username.Text() + "&pass=" + password.Text());
         loginWeb.Get();
         role = "Customer";
     }
 
     public void adminButtonClicked()
     {
-        loginWeb.Url("https://fachtnaroe.net/pcpitstop-2018-test?cmd=login&user=" + username.Text() + "&pass=" + password.Text());
+        loginWeb.Url(baseURL +"cmd=login&user=" + username.Text() + "&pass=" + password.Text());
         loginWeb.Get();
         role = "Admin";
     }
@@ -241,7 +244,7 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
 
     public void officeButtonClicked()
     {
-        loginWeb.Url("https://fachtnaroe.net/pcpitstop-2018-test?cmd=login&user=" + username.Text() + "&pass=" + password.Text());
+        loginWeb.Url(baseURL + "cmd=login&user=" + username.Text() + "&pass=" + password.Text());
         loginWeb.Get();
         role = "Office";
     }
