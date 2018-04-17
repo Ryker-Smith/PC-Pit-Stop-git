@@ -2,44 +2,44 @@ package net.fachtnaroe.pcpitstop_git;
 
 public class PCPS_Job
 {
-    private int JobNum;
-    private int CustNum;
-    private String Details;
-    private String Location;
-    private String Status;
+    private int jobNum;
+    private int custNum;
+    private String details;
+    private String location;
+    private String status;
 
-    public PCPS_Job(int JobNumber, int CustomerNumber, String JobDetails, String JobLocation)
+    public PCPS_Job(int jobNumber, int customerNumber, String jobDetails, String jobLocation)
     {
 
     }
 
-    public void setDetails(String JobDetails)
+    public void setDetails(String jobDetails)
     {
-        Details = JobDetails;
+        details = jobDetails;
     }
 
     public String getDetails()
     {
-        return Details;
+        return details;
     }
 
-    public void setLocation(String JobLocation)
+    public void setLocation(String jobLocation)
     {
-        Location = JobLocation;
+        location = jobLocation;
     }
 
     public String getLocation()
     {
-        return Location;
+        return location;
     }
 
-    public void setStatus(String JobStatus)
+    public void setStatus(String jobStatus)
     {
-        Status = JobStatus;
+        status = jobStatus;
     }
 
     public String getStatus()
     {
-        return Status;
+        return status;
     }
 }
