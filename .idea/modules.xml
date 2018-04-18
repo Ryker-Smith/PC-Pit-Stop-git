@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/PC-Pit-Stop-git.iml" filepath="$PROJECT_DIR$/PC-Pit-Stop-git.iml" />
       <module fileurl="file://$USER_HOME$/ownCloud/2017-2018/00-QQI-Materials/00-ProgrammingAndDesignPrinciples-5N2927/PC_Pit_Stop_git/PC_Pit_Stop_git.iml" filepath="$USER_HOME$/ownCloud/2017-2018/00-QQI-Materials/00-ProgrammingAndDesignPrinciples-5N2927/PC_Pit_Stop_git/PC_Pit_Stop_git.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$USER_HOME$/ownCloud/2017-2018/00-QQI-Materials/00-ProgrammingAndDesignPrinciples-5N2927/PC_Pit_Stop_git/app/app.iml" filepath="$USER_HOME$/ownCloud/2017-2018/00-QQI-Materials/00-ProgrammingAndDesignPrinciples-5N2927/PC_Pit_Stop_git/app/app.iml" />
     </modules>
   </component>
 </project>
