@@ -3,6 +3,7 @@ package net.fachtnaroe.pcpitstop_git;
 import android.content.Intent;
 import android.content.res.Resources;
 
+import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.google.appinventor.components.runtime.Button;
@@ -12,6 +13,7 @@ import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
 import com.google.appinventor.components.runtime.HorizontalArrangement;
 import com.google.appinventor.components.runtime.Label;
+import com.google.appinventor.components.runtime.Notifier;
 import com.google.appinventor.components.runtime.PasswordTextBox;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
@@ -19,6 +21,8 @@ import com.google.appinventor.components.runtime.Web;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static net.fachtnaroe.pcpitstop_git.code_commonBits.targetURL;
 
 public class screen01_startingLogin extends Form implements HandlesEventDispatching
 {
@@ -46,28 +50,27 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
     private Label Title;
     private Label usernameLabel;
     private Label passwordLabel;
-    private Web loginWeb;
+    private Web customer_webComponent, operator_webComponent, technician_webComponent, administrator_webComponent;
     private TextBox debugBox;
     private String sessionID;
+    private Notifier myNotify;
     private String role;
-    private String sessionIDWeb = "&sessionID=a1b2c3d4";
+//    private String sessionIDWeb = "&sessionID=a1b2c3d4";
     private Label loginTypeLineOne;
     private Label loginTypeLineTwo;
-
-    String baseURL = "https://fachtnaroe.net/pcpitstop-2018?";
 
     protected void $define()
     {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         //MainContainer. Contains main arrangement of objects plus "spacer" arrangement
         mainContainer = new VerticalArrangement(this);
-        mainContainer.Width(getScreenWidth());
-        mainContainer.Height(getScreenHeight());
+        mainContainer.Width(code_commonBits.getScreenWidth());
+        mainContainer.Height(code_commonBits.getScreenHeight());
         mainContainer.BackgroundColor(0xff99bbff);
 
         //Header with app title
         headerArrangement = new HorizontalArrangement(mainContainer);
-        headerArrangement.Width((getScreenWidth()));
+        headerArrangement.Width((code_commonBits.getScreenWidth()));
         headerArrangement.HeightPercent(25);
         headerArrangement.AlignHorizontal(1);
         headerArrangement.AlignVertical(1);
@@ -83,22 +86,22 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
         logoCanvas.BackgroundImage("Logo.png");
 
         loginBody = new HorizontalArrangement(mainContainer);
-        loginBody.Width(getScreenWidth());
+        loginBody.Width(code_commonBits.getScreenWidth());
         loginBody.HeightPercent(30);
 
         //spacer that keeps everything 5% from the left
         leftSideSpacerUpper = new VerticalArrangement(loginBody);
         leftSideSpacerUpper.WidthPercent(25);
-        leftSideSpacerUpper.Height(getScreenHeight());
+        leftSideSpacerUpper.Height(code_commonBits.getScreenHeight());
 
         //Main Arrangement of objects
         loginArrangement = new VerticalArrangement(loginBody);
-        loginArrangement.Width(getScreenWidth());
-        loginArrangement.Height(getScreenHeight());
+        loginArrangement.Width(code_commonBits.getScreenWidth());
+        loginArrangement.Height(code_commonBits.getScreenHeight());
 
         //Arrangement for Text fields (Username, Password)
         textFieldsArrangement = new VerticalArrangement(loginArrangement);
-        textFieldsArrangement.Width((getScreenWidth()));
+        textFieldsArrangement.Width((code_commonBits.getScreenWidth()));
         textFieldsArrangement.HeightPercent(30);
 
         usernameLabel = new Label(textFieldsArrangement);
@@ -127,11 +130,11 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
         loginTypeLineOne.FontBold(true);
 
         loginBodyLower = new HorizontalArrangement(mainContainer);
-        loginBodyLower.Height(getScreenHeight());
-        loginBodyLower.Width(getScreenWidth());
+        loginBodyLower.Height(code_commonBits.getScreenHeight());
+        loginBodyLower.Width(code_commonBits.getScreenWidth());
 
         leftSideSpacerLower = new VerticalArrangement(loginBodyLower);
-        leftSideSpacerLower.Height(getScreenHeight());
+        leftSideSpacerLower.Height(code_commonBits.getScreenHeight());
         leftSideSpacerLower.WidthPercent(10);
 
         rolesArrangement = new VerticalArrangement(loginBodyLower);
@@ -162,7 +165,10 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
         operatorButton.Image("OperatorButtonImage.png");
 
         //initialise web component for login
-        loginWeb = new Web(loginArrangement);
+        customer_webComponent = new Web(loginArrangement);
+        operator_webComponent = new Web(loginArrangement);
+        technician_webComponent = new Web(loginArrangement);
+        administrator_webComponent = new Web(loginArrangement);
 
         //box to display reault of web also to show that session ID is successfully stored
         debugBox = new TextBox(loginArrangement);
@@ -174,7 +180,12 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
         EventDispatcher.registerEventForDelegation(this, "adminButton", "Click");
         EventDispatcher.registerEventForDelegation(this, "techButton", "Click");
         EventDispatcher.registerEventForDelegation(this, "operatorButton", "Click");
-        EventDispatcher.registerEventForDelegation(this, "loginWeb", "GotText");
+//        EventDispatcher.registerEventForDelegation(this, "loginWeb", "GotText");
+
+        EventDispatcher.registerEventForDelegation(this, "customer_webComponent", "GotText");
+        EventDispatcher.registerEventForDelegation(this, "operator_webComponent", "GotText");
+        EventDispatcher.registerEventForDelegation(this, "technician_webComponent", "GotText");
+        EventDispatcher.registerEventForDelegation(this, "administrator_webComponent", "GotText");
 
     }
 
@@ -189,27 +200,47 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
 
         else if (component.equals(adminButton) && eventName.equals("Click"))
         {
-            adminButtonClicked();
+            administratorButtonClicked();
             return true;
         }
 
         else if (component.equals(techButton) && eventName.equals("Click"))
         {
-            techButtonClicked();
+            technicianButtonClicked();
             return true;
         }
 
         else if (component.equals(operatorButton) && eventName.equals("Click"))
         {
-            officeButtonClicked();
+            operatorButtonClicked();
             return true;
         }
 
         //if web has got a result
-        else if (component.equals(loginWeb) && eventName.equals("GotText"))
-        {
+//        else if (component.equals(loginWeb) && eventName.equals("GotText"))
+//        {
+//            String result = (String) params[3];
+//            youveGotText(result);
+//            return true;
+//        }
+        else if (component.equals(customer_webComponent) && eventName.equals("GotText")) {
             String result = (String) params[3];
-            youveGotText(result);
+            customerGotText(result);
+            return true;
+        }
+        else if (component.equals(operator_webComponent) && eventName.equals("GotText")) {
+            String result = (String) params[3];
+            operatorGotText(result);
+            return true;
+        }
+        else if (component.equals(administrator_webComponent) && eventName.equals("GotText")) {
+            String result = (String) params[3];
+            administratorGotText(result);
+            return true;
+        }
+        else if (component.equals(technician_webComponent) && eventName.equals("GotText")) {
+            String result = (String) params[3];
+            technicianGotText(result);
             return true;
         }
 
@@ -223,29 +254,29 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
     public void customerButtonClicked()
     {
 
-        loginWeb.Url(baseURL + "cmd=login&user=" + username.Text() + "&pass=" + password.Text());
-        loginWeb.Get();
+        customer_webComponent.Url(targetURL + "cmd=login&user=" + username.Text() + "&pass=" + password.Text());
+        customer_webComponent.Get();
         role = "Customer";
     }
 
-    public void adminButtonClicked()
+    public void administratorButtonClicked()
     {
-        loginWeb.Url(baseURL +"cmd=login&user=" + username.Text() + "&pass=" + password.Text());
-        loginWeb.Get();
+        administrator_webComponent.Url(targetURL +"cmd=login&user=" + username.Text() + "&pass=" + password.Text());
+        administrator_webComponent.Get();
         role = "Admin";
     }
 
-    public void techButtonClicked()
+    public void technicianButtonClicked()
     {
-        loginWeb.Url("https://fachtnaroe.net/pcpitstop-2018-test?cmd=login&user=" + username.Text() + "&pass=" + password.Text());
-        loginWeb.Get();
+        technician_webComponent.Url(targetURL + "cmd=login&user=" + username.Text() + "&pass=" + password.Text());
+        technician_webComponent.Get();
         role = "Tech";
     }
 
-    public void officeButtonClicked()
+    public void operatorButtonClicked()
     {
-        loginWeb.Url(baseURL + "cmd=login&user=" + username.Text() + "&pass=" + password.Text());
-        loginWeb.Get();
+        operator_webComponent.Url(targetURL + "cmd=login&user=" + username.Text() + "&pass=" + password.Text());
+        operator_webComponent.Get();
         role = "Office";
     }
 
@@ -265,13 +296,11 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
                 username.BackgroundColor(0xffffffff);
                 nextScreen();
             }
-
             else
             {
                 username.BackgroundColor(0xffff6666);
                 password.BackgroundColor(0xffff6666);
             }
-
         }
 
         catch(JSONException e)
@@ -280,17 +309,73 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
         }
     }
 
-    //get width of screen
-    public static int getScreenWidth()
-    {
-        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    public void customerGotText(String result) {
+        startActivity(new Intent(screen01_startingLogin.this, screen07_customerHome.class));
+        try {
+            JSONObject parser = new JSONObject(result);
+            if (parser.getString("result").equals("OK"))
+            {}
+        } catch (JSONException e) {
+            // if an exception occurs, code for it in here
+        }
     }
 
-    //get height of screen
-    public static int getScreenHeight()
-    {
-        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    public void operatorGotText(String result) {
+        try {
+            JSONObject parser = new JSONObject(result);
+            debugBox.Text(
+                    parser.getString("Status") + " (" +
+                            parser.getString("sessionID") + ")"
+            );
+            if (parser.getString("Status").equals("OK")) {
+                sessionID= parser.getString("sessionID");
+//                localDB.StoreValue("sessionID", sessionID);
+//                localDB.StoreValue((String) "sessionID", (Object) sessionID);
+                Intent intent = new Intent(this, screen02_operatorHome.class);
+                Bundle b = new Bundle();
+                b.putString("sessionID", sessionID); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+//                finish();
+//                startActivity(new Intent(startingLogin_screen01.this, operatorHome_screen02.class));
+//                startingLogin_screen01.switchForm("customerAddEdit_screen04");
+            }
+        } catch (JSONException e) {
+            // if an exception occurs, code for it in here
+            myNotify.ShowMessageDialog("Error logging in", "Error", "OK");
+        }
     }
+
+    public void technicianGotText(String result) {
+        startActivity(new Intent(screen01_startingLogin.this, screen02_operatorHome.class));
+        try {
+            JSONObject parser = new JSONObject(result);
+//            outputBox.Text(
+//                    parser.getString("result") + " (" +
+//                           parser.getString("sessionID") + ")"
+//            );
+
+            if (parser.getString("result").equals("OK")) {}
+        } catch (JSONException e) {
+            // if an exception occurs, code for it in here
+        }
+    }
+
+    public void administratorGotText(String result) {
+        startActivity(new Intent(screen01_startingLogin.this, screen02_operatorHome.class));
+        try {
+            JSONObject parser = new JSONObject(result);
+//            outputBox.Text(
+//                    parser.getString("result") + " (" +
+//                           parser.getString("sessionID") + ")"
+//            );
+
+            if (parser.getString("Status").equals("OK")) {}
+        } catch (JSONException e) {
+            // if an exception occurs, code for it in here
+        }
+    }
+
 
     public void nextScreen()
     {

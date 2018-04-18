@@ -1,5 +1,7 @@
 package net.fachtnaroe.pcpitstop_git;
 
+import android.content.res.Resources;
+
 public class code_commonBits {
 
     public static String targetURL = "https://fachtnaroe.net/pcpitstop-2018?";
@@ -25,5 +27,16 @@ public class code_commonBits {
             }
         }
         return result;
+    }
+
+    public static int getScreenWidth()
+    {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    //get height of screen
+    public static int getScreenHeight()
+    {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 }
