@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="net.fachtnaroe.pcpitstop_git.splash_screen00">
+        <activity android:name="net.fachtnaroe.pcpitstop_git.screen00_splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,35 +19,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.startingLogin_screen01"
+            android:name="net.fachtnaroe.pcpitstop_git.screen01_startingLogin"
             android:label="screen_Login">
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.operatorHome_screen02"
+            android:name="net.fachtnaroe.pcpitstop_git.screen02_operatorHome"
             android:label="screen_operatorHome">
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.jobAddEdit_screen03"
+            android:name="net.fachtnaroe.pcpitstop_git.screen03_jobAddEdit"
             android:label="screen_jobAddEdit">
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.customerAddEdit_screen04"
+            android:name="net.fachtnaroe.pcpitstop_git.screen04_customerAddEdit"
             android:label="screen_customerAddEdit">
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.technicianHome_screen05"
+            android:name="net.fachtnaroe.pcpitstop_git.screen05_technicianHome"
             android:label="screen_technicianHome">
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.customerHome_screen07"
+            android:name="net.fachtnaroe.pcpitstop_git.screen07_customerHome"
             android:label="screen_customerHome">
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.administratorHome_screen09"
+            android:name="net.fachtnaroe.pcpitstop_git.screen09_administratorHome"
             android:label="screen_administratorHome">
         </activity>
         <activity
-            android:name="net.fachtnaroe.pcpitstop_git.userAddEdit_screen10"
+            android:name="net.fachtnaroe.pcpitstop_git.screen10_userAddEdit"
             android:label="screen_userAddEdit">
         </activity>
 
