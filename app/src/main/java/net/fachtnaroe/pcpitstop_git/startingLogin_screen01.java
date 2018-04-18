@@ -112,7 +112,7 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
         username.BackgroundColor(0xffffffff);
 
         passwordLabel = new Label(textFieldsArrangement);
-        passwordLabel.Text("Password:");
+        passwordLabel.Text("PasswordNK:");
 
         //password field
         password = new PasswordTextBox(textFieldsArrangement);
