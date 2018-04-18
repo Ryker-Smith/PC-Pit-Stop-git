@@ -102,7 +102,7 @@ public class startingLogin_screen01 extends Form implements HandlesEventDispatch
         textFieldsArrangement.HeightPercent(30);
 
         usernameLabel = new Label(textFieldsArrangement);
-        usernameLabel.Text("UsernameTest:");
+        usernameLabel.Text("UsernameK:");
 
         //username field
         username = new TextBox(textFieldsArrangement);
