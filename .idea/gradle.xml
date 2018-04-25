@@ -7,9 +7,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/ownCloud/2017-2018/00-QQI-Materials/00-ProgrammingAndDesignPrinciples-5N2927/PC_Pit_Stop_git" />
-            <option value="$USER_HOME$/ownCloud/2017-2018/00-QQI-Materials/00-ProgrammingAndDesignPrinciples-5N2927/PC_Pit_Stop_git/PPSN" />
-            <option value="$USER_HOME$/ownCloud/2017-2018/00-QQI-Materials/00-ProgrammingAndDesignPrinciples-5N2927/PC_Pit_Stop_git/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/PPSN" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
