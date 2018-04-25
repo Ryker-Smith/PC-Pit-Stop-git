@@ -2,17 +2,32 @@ package net.fachtnaroe.pcpitstop_git;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 
+import com.google.appinventor.components.runtime.Button;
+import com.google.appinventor.components.runtime.Component;
 import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
 import com.google.appinventor.components.runtime.HorizontalArrangement;
 import com.google.appinventor.components.runtime.Label;
 import com.google.appinventor.components.runtime.ListPicker;
+import com.google.appinventor.components.runtime.ListView;
+import com.google.appinventor.components.runtime.Notifier;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
 import com.google.appinventor.components.runtime.VerticalScrollArrangement;
+import com.google.appinventor.components.runtime.Web;
+import com.google.appinventor.components.runtime.util.YailList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import static net.fachtnaroe.pcpitstop_git.code_commonBits.targetURL;
 
 public class screen07_customerHome extends Form implements HandlesEventDispatching
 {
@@ -25,19 +40,38 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
     private VerticalArrangement customerDetailsArrangement;
     private VerticalArrangement jobDetailsArrangement;
     private VerticalScrollArrangement actionsforSelectedJobArrangement;
+    private VerticalScrollArrangement jobs;
     private Label customersLabel;
     private Label actionsLabel;
     private TextBox customerDetails;
     private ListPicker jobDetails;
+    private ListView jobList;
     private TextBox actionsDetails;
+    private Notifier myNotify;
+    private JSONArray jobData;
+    private Web jobList_webComponent;
+    private String sessionID;
+    private Label jobsLabel;
+    private HorizontalArrangement jobsControlButtonArea;
+    private Button jobsControlReport;
+    private HorizontalArrangement customerDetailsControlButtonArea;
+    private Button customerDetailsControlReport;
 
     protected void $define()
     {
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            sessionID = b.getString("sessionID");
+        }
+
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         mainContainer = new VerticalArrangement(this);
         mainContainer.Width(getScreenWidth());
         mainContainer.Height(getScreenHeight());
         mainContainer.BackgroundColor(0xff99bbff);
+        myNotify = new Notifier(mainContainer);
+
 
         headerArrangement = new VerticalArrangement(mainContainer);
         headerArrangement.Width((int)(getScreenWidth()));
@@ -81,14 +115,46 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
         customerDetails.WidthPercent(90);
         customerDetails.HeightPercent(35);
 
-        jobDetailsArrangement = new VerticalArrangement(customerScreenBody);
-        jobDetailsArrangement.BackgroundColor(0xffffffff);
-        jobDetailsArrangement.HeightPercent(15);
+//        customerDetailsControlButtonArea = new HorizontalArrangement(customerScreenBody);
+//        customerDetailsControlButtonArea.WidthPercent(90);
+//        customerDetailsControlButtonArea.BackgroundColor(0xff99bbff);
+//        customerDetailsControlButtonArea.HeightPercent(10);
+//
+//        customerDetailsControlReport = new Button(jobsControlButtonArea);
+//        customerDetailsControlReport.WidthPercent(50);
+//        customerDetailsControlReport.Text("Report");
+//        customerDetailsControlReport.BackgroundColor(0xff004a99);
+//        customerDetailsControlReport.TextColor(0xffffffff);
 
-        jobDetails = new ListPicker(jobDetailsArrangement);
-        jobDetails.ElementsFromString("Job1, Job2, Job3");
-        jobDetails.WidthPercent(90);
-        jobDetails.Title("Jobs");
+        jobsLabel = new Label(customerScreenBody);
+        jobsLabel.FontSize(20);
+        jobsLabel.TextColor(0xff000000);
+        jobsLabel.Visible(true);
+        jobsLabel.Text("jobs:");
+
+        jobs = new VerticalScrollArrangement(customerScreenBody);
+        jobs.HeightPercent(25);
+        jobs.WidthPercent(90);
+        jobs.BackgroundColor(0xffffffff);
+        jobList = new ListView(jobs);
+        jobList.Width(LENGTH_FILL_PARENT);
+        jobList.HeightPercent(40);
+        jobList.SelectionColor(COLOR_LTGRAY);
+        jobList.ShowFilterBar(true);
+        jobList.TextSize(40);
+        jobList.TextColor(0xff004a99);
+        jobList.BackgroundColor(COLOR_WHITE);
+
+        jobsControlButtonArea = new HorizontalArrangement(customerScreenBody);
+        jobsControlButtonArea.WidthPercent(90);
+        jobsControlButtonArea.BackgroundColor(0xff99bbff);
+        jobsControlButtonArea.HeightPercent(10);
+
+        jobsControlReport = new Button(jobsControlButtonArea);
+        jobsControlReport.WidthPercent(50);
+        jobsControlReport.Text("Report");
+        jobsControlReport.BackgroundColor(0xff004a99);
+        jobsControlReport.TextColor(0xffffffff);
 
         actionsforSelectedJobArrangement = new VerticalScrollArrangement(customerScreenBody);
         actionsforSelectedJobArrangement.BackgroundColor(0xffe6f2ff);
@@ -105,9 +171,65 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
         actionsDetails.Text("Job Action Details go here");
         actionsDetails.WidthPercent(90);
         actionsDetails.HeightPercent(25);
+
+        jobList_webComponent = new Web(mainContainer);
+        jobList_webComponent.Url(targetURL + "&" +
+                code_commonBits.RequestCombine(new String[]{
+                        code_commonBits.RequestValue("sessionID", sessionID),
+                        code_commonBits.RequestValue("entity", "job")
+                }));
+        jobList_webComponent.Get();
+
     }
 
-    @Override
+    public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params)
+    {
+//        //if login button clicked
+//        if (component.equals(jobsControlAdd) && eventName.equals("Click"))  {
+//            addJobButtonClicked();
+//            return true;
+//        }
+        if (component.equals(jobList_webComponent) && eventName.equals("GotText")) {
+            String result = (String) params[3];
+            gotJobs(result);
+            return true;
+        }
+        else  {
+            return false;
+        }
+    }
+
+    void gotJobs(String result) {
+        try {
+            JSONObject myJSONparser = new JSONObject(result);
+            jobData = myJSONparser.getJSONArray("job");
+            ArrayList<String> temp_NotYlist = new ArrayList<String>(toJobList(jobData));
+            YailList temp_Ylist = YailList.makeList(temp_NotYlist);
+            jobList.Elements(temp_Ylist);
+        } catch (JSONException e) {
+            myNotify.ShowMessageDialog("Error getting job list", "Error", "Grand");
+        }
+    }
+
+    public ArrayList<String> toJobList (JSONArray data) {
+        ArrayList<String> jobs = new ArrayList<String>();
+        try {
+            for (int n = 0; n <= data.length() - 1; n++) {
+                String line = "[pID " + data.getJSONObject(n).getString("pID")
+                        + "] " + data.getJSONObject(n).getString("Details")
+                        + " of " + data.getJSONObject(n).getString("Location");
+                jobs.add(line);
+                Log.i("PCPITSTOP ", line); // remove when production ready
+            }
+            return jobs;
+
+        } catch (JSONException e) {
+            // if an exception occurs, code for it in here
+        }
+        return null;
+    }
+
+        @Override
     public void onBackPressed()
     {
         super.onBackPressed();
