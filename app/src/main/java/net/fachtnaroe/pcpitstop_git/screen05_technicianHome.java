@@ -192,7 +192,7 @@ public class screen05_technicianHome extends Form implements HandlesEventDispatc
             jobList = myJSONparser.getJSONArray("job");
             ArrayList<String> temp_NotYlist = new ArrayList<>(toJobList(jobList));
             YailList temp_Ylist = YailList.makeList(temp_NotYlist);
-            jobs.Elements();
+            jobs.Elements(temp_Ylist);
         }
         catch (JSONException e) {
             myNotify.ShowMessageDialog("Error getting job list", "Error", "Grand");
