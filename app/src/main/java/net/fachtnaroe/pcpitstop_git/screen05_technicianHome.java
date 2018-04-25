@@ -67,7 +67,7 @@ public class screen05_technicianHome extends Form implements HandlesEventDispatc
         mainContainer.Width(getScreenWidth());
         mainContainer.Height(getScreenHeight());
         mainContainer.BackgroundColor(0xff99bbff);
-
+        myNotify = new Notifier(mainContainer);
         headerArrangement = new VerticalArrangement(mainContainer);
         headerArrangement.Width((getScreenWidth()));
         headerArrangement.HeightPercent(10);
