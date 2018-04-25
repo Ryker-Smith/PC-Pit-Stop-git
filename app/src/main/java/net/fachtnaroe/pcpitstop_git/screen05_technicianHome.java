@@ -69,7 +69,7 @@ public class screen05_technicianHome extends Form implements HandlesEventDispatc
         mainContainer.BackgroundColor(0xff99bbff);
 
         headerArrangement = new VerticalArrangement(mainContainer);
-        headerArrangement.Width((int)(getScreenWidth()));
+        headerArrangement.Width((getScreenWidth()));
         headerArrangement.HeightPercent(10);
         headerArrangement.AlignHorizontal(1);
         headerArrangement.AlignVertical(1);
@@ -82,8 +82,8 @@ public class screen05_technicianHome extends Form implements HandlesEventDispatc
         title.Visible(true);
 
         techScreenBodyWithSpacer = new HorizontalArrangement(mainContainer);
-        techScreenBodyWithSpacer.Width((int)(getScreenWidth()));
-        techScreenBodyWithSpacer.Height((int)(getScreenHeight()));
+        techScreenBodyWithSpacer.Width((getScreenWidth()));
+        techScreenBodyWithSpacer.Height((getScreenHeight()));
 
         //spacer that keeps everything 5% from the left
         leftSideSpacer = new VerticalArrangement(techScreenBodyWithSpacer);
@@ -91,8 +91,8 @@ public class screen05_technicianHome extends Form implements HandlesEventDispatc
         leftSideSpacer.Height(getScreenHeight());
 
         techScreenBody = new VerticalArrangement(techScreenBodyWithSpacer);
-        techScreenBody.Width((int)(getScreenWidth()));
-        techScreenBody.Height((int)(getScreenHeight()));
+        techScreenBody.Width((getScreenWidth()));
+        techScreenBody.Height((getScreenHeight()));
 
         jobsLabel = new Label(techScreenBody);
         jobsLabel.FontSize(20);
@@ -190,7 +190,7 @@ public class screen05_technicianHome extends Form implements HandlesEventDispatc
         try {
             JSONObject myJSONparser = new JSONObject(result);
             jobList = myJSONparser.getJSONArray("job");
-            ArrayList<String> temp_NotYlist = new ArrayList<String>(toJobList(jobList));
+            ArrayList<String> temp_NotYlist = new ArrayList<>(toJobList(jobList));
             YailList temp_Ylist = YailList.makeList(temp_NotYlist);
             jobs.Elements();
         }
@@ -199,7 +199,7 @@ public class screen05_technicianHome extends Form implements HandlesEventDispatc
         }
     }
     public ArrayList<String> toJobList (JSONArray data) {
-        ArrayList<String> jobs = new ArrayList<String>();
+        ArrayList<String> jobs = new ArrayList<>();
         try {
             for (int n=0; n<=data.length()-1;n++) {
                 String line = "[pID " + data.getJSONObject(n).getString("pID")
