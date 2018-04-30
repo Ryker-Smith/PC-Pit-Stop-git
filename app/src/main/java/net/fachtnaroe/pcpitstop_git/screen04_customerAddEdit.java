@@ -22,11 +22,11 @@ import org.json.JSONObject;
 
 public class screen04_customerAddEdit extends Form implements HandlesEventDispatching
 {
-    private Button connectionButton, postButton, putButton, deleteButton, getButton;
+    private Button connectionButton, postButton, putButton, deleteButton, getButton, autoLocateButton;
     private Label firstLabel, familyLabel, emailLabel, phoneLabel, responseLabel, ppsLabel, urlLabel, debugSideLabel;
     private Web webComponent_POST, webComponent_PUT, webComponent_GET, webComponent_DELETE;
     private VerticalScrollArrangement mainContainer;
-    private HorizontalArrangement topLine, nextLine, ppsLine;
+        private HorizontalArrangement topLine, nextLine, ppsLine, locateArrangement;
     public static TextBox firstName, lastName, email, phone, urlBox, outputBox, ppsBox, debugLabel, sessionIDBox;
     private Label address1Label, address2Label, address3Label, sessionIDLabel;
     public static TextBox addressLineOne, addressLineTwo, addressLineThree;
@@ -46,15 +46,16 @@ public class screen04_customerAddEdit extends Form implements HandlesEventDispat
 
         topLine = new HorizontalArrangement(mainContainer);
         topLine.WidthPercent(100);
+        topLine.HeightPercent(10);
         Label titleLabel = new Label(topLine);
         titleLabel.Text("Add / Edit Customer");
         titleLabel.FontSize(20);
-        titleLabel.FontTypeface(Component.TYPEFACE_SERIF);
         titleLabel.WidthPercent(100);
         titleLabel.FontBold(true);
-        titleLabel.TextAlignment(Component.ALIGNMENT_CENTER);
+        titleLabel.TextColor(0xffffffff);
 
         HorizontalArrangement urlHorz = new HorizontalArrangement(mainContainer);
+        urlHorz.Visible(false);
         urlLabel = new Label(urlHorz);
         urlLabel.Text("Backend:");
         urlBox = new TextBox(urlHorz);
@@ -124,6 +125,17 @@ public class screen04_customerAddEdit extends Form implements HandlesEventDispat
         addressLineThree.WidthPercent(100);
         addressLineThree.Text("");
 
+        locateArrangement = new HorizontalArrangement(mainContainer);
+        locateArrangement.WidthPercent(30);
+
+        autoLocateButton = new Button(locateArrangement);
+        autoLocateButton.HeightPercent(10);
+        autoLocateButton.Text("Auto Locate");
+        autoLocateButton.WidthPercent(25);
+        autoLocateButton.FontSize(10);
+        autoLocateButton.BackgroundColor(0xff004a99);
+        autoLocateButton.TextColor(0xffffffff);
+
         HorizontalArrangement ppsHoriz = new HorizontalArrangement(mainContainer);
         ppsHoriz.WidthPercent(100);
         ppsLabel = new Label(ppsHoriz);
@@ -143,6 +155,7 @@ public class screen04_customerAddEdit extends Form implements HandlesEventDispat
         sessionIDBox.Text("");
 
         HorizontalArrangement debugHoriz = new HorizontalArrangement(mainContainer);
+        debugHoriz.Visible(false);
         debugSideLabel = new Label(debugHoriz);
         debugSideLabel.WidthPercent(20);
         debugSideLabel.Text("Debug: ");
@@ -155,11 +168,16 @@ public class screen04_customerAddEdit extends Form implements HandlesEventDispat
         postButton = new Button(uploadHoriz);
         postButton.Text("POST");
         postButton.WidthPercent(50);
+        postButton.TextColor(0xffffffff);
+        postButton.BackgroundColor(0xff004a99);
+
 
         putButton = new Button(uploadHoriz);
         putButton.Text("PUT");
         putButton.WidthPercent(50);
         putButton.Enabled(false);
+        putButton.TextColor(0xffffffff);
+        putButton.BackgroundColor(0xff004a99);
 
         HorizontalArrangement getHoriz = new HorizontalArrangement(mainContainer);
         getHoriz.WidthPercent(100);
@@ -167,11 +185,15 @@ public class screen04_customerAddEdit extends Form implements HandlesEventDispat
         deleteButton.Text("DELETE");
         deleteButton.WidthPercent(50);
         deleteButton.Enabled(false);
+        deleteButton.TextColor(0xffffffff);
+        deleteButton.BackgroundColor(0xff004a99);
 
         getButton = new Button(getHoriz);
         getButton.Text("GET");
         getButton.WidthPercent(50);
         getButton.Enabled(false);
+        getButton.TextColor(0xffffffff);
+        getButton.BackgroundColor(0xff004a99);
 
 //        connectionButton = new Button(screenContainer);
 //        connectionButton.Text("Connect");
