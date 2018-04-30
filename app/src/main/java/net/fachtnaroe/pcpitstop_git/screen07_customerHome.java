@@ -8,6 +8,7 @@ import android.view.WindowManager;
 
 import com.google.appinventor.components.runtime.Button;
 import com.google.appinventor.components.runtime.Component;
+import com.google.appinventor.components.runtime.EventDispatcher;
 import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
 import com.google.appinventor.components.runtime.HorizontalArrangement;
@@ -185,6 +186,8 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
         actionsDetailsControlReport.Text("Report");
         actionsDetailsControlReport.BackgroundColor(0xff004a99);
         actionsDetailsControlReport.TextColor(0xffffffff);
+
+        EventDispatcher.registerEventForDelegation(this, "jobsList_webComponent", "GotText");
 
         jobList_webComponent = new Web(mainContainer);
         jobList_webComponent.Url(targetURL + "&" +
