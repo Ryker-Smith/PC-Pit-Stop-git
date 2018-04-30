@@ -86,7 +86,7 @@ public class screen02_operatorHome extends Form implements HandlesEventDispatchi
 
         //spacer that keeps everything 5% from the left
         leftSideSpacer = new VerticalArrangement(operatorScreenBodyWithSpacer);
-        leftSideSpacer.WidthPercent(10);
+        leftSideSpacer.WidthPercent(5);
         leftSideSpacer.Height(code_commonBits.getScreenHeight());
 
         operatorScreenBody = new VerticalArrangement(operatorScreenBodyWithSpacer);

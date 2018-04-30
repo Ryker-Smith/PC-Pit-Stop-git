@@ -1,214 +1,306 @@
 package net.fachtnaroe.pcpitstop_git;
 
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.google.appinventor.components.runtime.Button;
+import com.google.appinventor.components.runtime.Component;
+import com.google.appinventor.components.runtime.EventDispatcher;
 import com.google.appinventor.components.runtime.Form;
 import com.google.appinventor.components.runtime.HandlesEventDispatching;
 import com.google.appinventor.components.runtime.HorizontalArrangement;
 import com.google.appinventor.components.runtime.Label;
 import com.google.appinventor.components.runtime.TextBox;
 import com.google.appinventor.components.runtime.VerticalArrangement;
+import com.google.appinventor.components.runtime.VerticalScrollArrangement;
+import com.google.appinventor.components.runtime.Web;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class screen04_customerAddEdit extends Form implements HandlesEventDispatching
 {
-    private VerticalArrangement mainContainer;
-    private VerticalArrangement leftSideSpacer;
-    private VerticalArrangement headerArrangement;
-    private HorizontalArrangement addCustomerScreenBodyWithSpacer;
-    private VerticalArrangement addCustomerScreenBody;
-    private HorizontalArrangement nameField;
-    private VerticalArrangement nameArrangement;
-    private HorizontalArrangement contactField;
-    private VerticalArrangement contactArrangement;
-    private HorizontalArrangement addressField;
-    private VerticalArrangement addressArrangement;
-    private VerticalArrangement locateArrangement;
-    private HorizontalArrangement GPSField;
-    private HorizontalArrangement notesField;
-    private Label title;
-    private Label nameLabel;
-    private Label contactLabel;
-    private Label addressLabel;
-    private Label GPSLabel;
-    private Label notesLabel;
-    public static TextBox firstName;
-    public static TextBox lastName;
-    public static TextBox phone;
-    public static TextBox email;
-    public static TextBox addressLineOne;
-    public static TextBox addressLineTwo;
-    public static TextBox addressLineThree;
-    private Button autoLocateButton;
-    private TextBox GPSLocation;
-    private HorizontalArrangement addCustomerControlButtonArea;
-    private Button customerControl_Save;
+    private Button connectionButton, postButton, putButton, deleteButton, getButton;
+    private Label firstLabel, familyLabel, emailLabel, phoneLabel, responseLabel, ppsLabel, urlLabel, debugSideLabel;
+    private Web webComponent_POST, webComponent_PUT, webComponent_GET, webComponent_DELETE;
+    private VerticalScrollArrangement mainContainer;
+    private HorizontalArrangement topLine, nextLine, ppsLine;
+    public static TextBox firstName, lastName, email, phone, urlBox, outputBox, ppsBox, debugLabel, sessionIDBox;
+    private Label address1Label, address2Label, address3Label, sessionIDLabel;
+    public static TextBox addressLineOne, addressLineTwo, addressLineThree;
+    private String remoteHost = "https://fachtnaroe.net";
+    //    private Image myLogo;
+    private String targetURL = new String();
 
 
-    protected void $define()
-    {
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        mainContainer = new VerticalArrangement(this);
-        mainContainer.Width(getScreenWidth());
-        mainContainer.Height(getScreenHeight());
+    protected void $define() {
+
+//      GUI setup
+
+        mainContainer = new VerticalScrollArrangement(this);
+        mainContainer.WidthPercent(100);
+        mainContainer.HeightPercent(100);
         mainContainer.BackgroundColor(0xff99bbff);
 
-        headerArrangement = new VerticalArrangement(mainContainer);
-        headerArrangement.Width((int)(getScreenWidth()));
-        headerArrangement.HeightPercent(10);
-        headerArrangement.AlignHorizontal(1);
-        headerArrangement.AlignVertical(1);
+        topLine = new HorizontalArrangement(mainContainer);
+        topLine.WidthPercent(100);
+        Label titleLabel = new Label(topLine);
+        titleLabel.Text("Add / Edit Customer");
+        titleLabel.FontSize(20);
+        titleLabel.FontTypeface(Component.TYPEFACE_SERIF);
+        titleLabel.WidthPercent(100);
+        titleLabel.FontBold(true);
+        titleLabel.TextAlignment(Component.ALIGNMENT_CENTER);
 
-        title = new Label(headerArrangement);
-        title.Text("Add Customer");
-        title.FontSize(20);
-        title.FontBold(true);
-        title.TextColor(0xffffffff);
-        title.Visible(true);
+        HorizontalArrangement urlHorz = new HorizontalArrangement(mainContainer);
+        urlLabel = new Label(urlHorz);
+        urlLabel.Text("Backend:");
+        urlBox = new TextBox(urlHorz);
+        urlBox.WidthPercent(100);
+        urlBox.Text(remoteHost + "/pcpitstop-2018");
 
-        addCustomerScreenBodyWithSpacer = new HorizontalArrangement(mainContainer);
-        addCustomerScreenBodyWithSpacer.Width((int)(getScreenWidth()));
-        addCustomerScreenBodyWithSpacer.Height((int)(getScreenHeight()));
+        HorizontalArrangement firstHoriz = new HorizontalArrangement(mainContainer);
+        firstHoriz.WidthPercent(100);
+        firstLabel = new Label(firstHoriz);
+        firstLabel.Text("First: ");
+        firstLabel.WidthPercent(20);
+        firstName = new TextBox(firstHoriz);
+        firstName.WidthPercent(100);
+        firstName.Text("");
 
-        //spacer that keeps everything 5% from the left
-        leftSideSpacer = new VerticalArrangement(addCustomerScreenBodyWithSpacer);
-        leftSideSpacer.WidthPercent(10);
-        leftSideSpacer.Height(getScreenHeight());
+        HorizontalArrangement familyHoriz = new HorizontalArrangement(mainContainer);
+        familyHoriz.WidthPercent(100);
+        familyLabel = new Label(familyHoriz);
+        familyLabel.Text("Family: ");
+        familyLabel.WidthPercent(20);
+        lastName = new TextBox(familyHoriz);
+        lastName.WidthPercent(100);
+        lastName.Text("");
 
-        addCustomerScreenBody = new VerticalArrangement(addCustomerScreenBodyWithSpacer);
-        addCustomerScreenBody.WidthPercent(90);
-        addCustomerScreenBody.Height((int)(getScreenHeight()));
+        HorizontalArrangement emailHoriz = new HorizontalArrangement(mainContainer);
+        emailHoriz.WidthPercent(100);
+        emailLabel = new Label(emailHoriz);
+        emailLabel.Text("email: ");
+        emailLabel.WidthPercent(20);
+        email = new TextBox(emailHoriz);
+        email.WidthPercent(100);
+        email.Text("");
 
-        nameField = new HorizontalArrangement(addCustomerScreenBody);
-        nameField.WidthPercent(90);
-        nameField.BackgroundColor(0xffe6f2ff);
+        HorizontalArrangement phoneHoriz = new HorizontalArrangement(mainContainer);
+        phoneHoriz.WidthPercent(100);
+        phoneLabel = new Label(phoneHoriz);
+        phoneLabel.Text("Phone: ");
+        phoneLabel.WidthPercent(20);
+        phone = new TextBox(phoneHoriz);
+        phone.WidthPercent(100);
+        phone.Text("");
 
-        nameLabel = new Label(nameField);
-        nameLabel.HeightPercent(10);
-        nameLabel.WidthPercent(30);
-        nameLabel.TextColor(0xff000000);
-        nameLabel.Visible(true);
-        nameLabel.Text("Name:");
+        HorizontalArrangement address1Horiz = new HorizontalArrangement(mainContainer);
+        address1Horiz.WidthPercent(100);
+        address1Label = new Label(address1Horiz);
+        address1Label.Text("Address1: ");
+        address1Label.WidthPercent(20);
+        addressLineOne = new TextBox(address1Horiz);
+        addressLineOne.WidthPercent(100);
+        addressLineOne.Text("");
 
-        nameArrangement = new VerticalArrangement(nameField);
-        nameArrangement.WidthPercent(60);
+        HorizontalArrangement address2Horiz = new HorizontalArrangement(mainContainer);
+        address2Horiz.WidthPercent(100);
+        address2Label = new Label(address2Horiz);
+        address2Label.Text("Address2: ");
+        address2Label.WidthPercent(20);
+        addressLineTwo = new TextBox(address2Horiz);
+        addressLineTwo.WidthPercent(100);
+        addressLineTwo.Text("");
 
-        firstName = new TextBox(nameArrangement);
-        firstName.HeightPercent(10);
-        firstName.WidthPercent(60);
+        HorizontalArrangement address3Horiz = new HorizontalArrangement(mainContainer);
+        address3Horiz.WidthPercent(100);
+        address3Label = new Label(address3Horiz);
+        address3Label.Text("Address3: ");
+        address3Label.WidthPercent(20);
+        addressLineThree = new TextBox(address3Horiz);
+        addressLineThree.WidthPercent(100);
+        addressLineThree.Text("");
 
-        lastName = new TextBox(nameArrangement);
-        lastName.HeightPercent(10);
-        lastName.WidthPercent(60);
+        HorizontalArrangement ppsHoriz = new HorizontalArrangement(mainContainer);
+        ppsHoriz.WidthPercent(100);
+        ppsLabel = new Label(ppsHoriz);
+        ppsLabel.Text("PPS: ");
+        ppsLabel.WidthPercent(20);
+        ppsBox = new TextBox(ppsHoriz);
+        ppsBox.WidthPercent(100);
+        ppsBox.Text("");
 
-        contactField = new HorizontalArrangement(addCustomerScreenBody);
-        contactField.WidthPercent(90);
-        contactField.BackgroundColor(0xffffffff);
+        HorizontalArrangement sessionIDHoriz = new HorizontalArrangement(mainContainer);
+        sessionIDHoriz.WidthPercent(100);
+        sessionIDLabel = new Label(sessionIDHoriz);
+        sessionIDLabel.Text("sessionID");
+        sessionIDLabel.WidthPercent(20);
+        sessionIDBox = new TextBox(sessionIDHoriz);
+        sessionIDBox.WidthPercent(100);
+        sessionIDBox.Text("");
 
-        contactLabel = new Label(contactField);
-        contactLabel.HeightPercent(10);
-        contactLabel.WidthPercent(30);
-        contactLabel.TextColor(0xff000000);
-        contactLabel.Visible(true);
-        contactLabel.Text("Contact Details:");
+        HorizontalArrangement debugHoriz = new HorizontalArrangement(mainContainer);
+        debugSideLabel = new Label(debugHoriz);
+        debugSideLabel.WidthPercent(20);
+        debugSideLabel.Text("Debug: ");
+        debugLabel = new TextBox(debugHoriz);
+        debugLabel.WidthPercent(100);
+        debugLabel.Text("");
 
-        contactArrangement = new VerticalArrangement(nameField);
-        contactArrangement.WidthPercent(60);
+        HorizontalArrangement uploadHoriz = new HorizontalArrangement(mainContainer);
+        uploadHoriz.WidthPercent(100);
+        postButton = new Button(uploadHoriz);
+        postButton.Text("POST");
+        postButton.WidthPercent(50);
 
-        phone = new TextBox(contactArrangement);
-        phone.HeightPercent(10);
-        phone.WidthPercent(60);
+        putButton = new Button(uploadHoriz);
+        putButton.Text("PUT");
+        putButton.WidthPercent(50);
+        putButton.Enabled(false);
 
-        email = new TextBox(contactArrangement);
-        email.HeightPercent(10);
-        email.WidthPercent(60);
+        HorizontalArrangement getHoriz = new HorizontalArrangement(mainContainer);
+        getHoriz.WidthPercent(100);
+        deleteButton = new Button(getHoriz);
+        deleteButton.Text("DELETE");
+        deleteButton.WidthPercent(50);
+        deleteButton.Enabled(false);
 
-        addressField = new HorizontalArrangement(addCustomerScreenBody);
-        addressField.WidthPercent(90);
-        addressField.BackgroundColor(0xffe6f2ff);
+        getButton = new Button(getHoriz);
+        getButton.Text("GET");
+        getButton.WidthPercent(50);
+        getButton.Enabled(false);
 
-        locateArrangement = new VerticalArrangement(addressField);
-        locateArrangement.WidthPercent(30);
+//        connectionButton = new Button(screenContainer);
+//        connectionButton.Text("Connect");
+//
+//        connectionButton.BackgroundColor(COLOR_LTGRAY);
+//        connectionButton.WidthPercent(50);
+//        connectionButton.TextAlignment(Component.ALIGNMENT_CENTER);
 
-        addressLabel = new Label(locateArrangement);
-        addressLabel.HeightPercent(10);
-        addressLabel.WidthPercent(30);
-        addressLabel.TextColor(0xff000000);
-        addressLabel.Visible(true);
-        addressLabel.Text("Address:");
+        webComponent_POST = new Web(mainContainer);
+        webComponent_PUT = new Web(mainContainer);
+        webComponent_GET = new Web(mainContainer);
+        webComponent_DELETE = new Web(mainContainer);
 
-        autoLocateButton = new Button(locateArrangement);
-        autoLocateButton.HeightPercent(10);
-        autoLocateButton.Text("Auto Locate");
-        autoLocateButton.WidthPercent(25);
-        autoLocateButton.FontSize(10);
-        autoLocateButton.BackgroundColor(0xff004a99);
-        autoLocateButton.TextColor(0xffffffff);
+//      Making events for buttons
 
-        addressArrangement = new VerticalArrangement(addressField);
-        addressArrangement.WidthPercent(60);
-
-        addressLineOne = new TextBox(addressArrangement);
-        addressLineOne.HeightPercent(10);
-        addressLineOne.WidthPercent(60);
-
-        addressLineTwo = new TextBox(addressArrangement);
-        addressLineTwo.HeightPercent(10);
-        addressLineTwo.WidthPercent(60);
-
-        addressLineThree = new TextBox(addressArrangement);
-        addressLineThree.HeightPercent(10);
-        addressLineThree.WidthPercent(60);
-
-        GPSField = new HorizontalArrangement(addCustomerScreenBody);
-        GPSField.WidthPercent(90);
-        GPSField.BackgroundColor(0xffffffff);
-
-        GPSLabel = new Label(GPSField);
-        GPSLabel.HeightPercent(10);
-        GPSLabel.WidthPercent(30);
-        GPSLabel.TextColor(0xff000000);
-        GPSLabel.Visible(true);
-        GPSLabel.Text("GPS:");
-
-        GPSLocation = new TextBox(GPSField);
-        GPSLocation.HeightPercent(10);
-        GPSLocation.WidthPercent(60);
-        GPSLocation.BackgroundColor(0xffffffff);
-        GPSLocation.Enabled(false);
-
-        notesField = new HorizontalArrangement(addCustomerScreenBody);
-        notesField.WidthPercent(90);
-        notesField.BackgroundColor(0xffe6f2ff);
-
-        notesLabel = new Label(notesField);
-        notesLabel.HeightPercent(10);
-        notesLabel.WidthPercent(30);
-        notesLabel.TextColor(0xff000000);
-        notesLabel.Visible(true);
-        notesLabel.Text("Notes:");
-
-        addCustomerControlButtonArea = new HorizontalArrangement(addCustomerScreenBody);
-        addCustomerControlButtonArea.WidthPercent(90);
-        addCustomerControlButtonArea.BackgroundColor(0xff99bbff);
-        addCustomerControlButtonArea.HeightPercent(10);
-
-        customerControl_Save = new Button(addCustomerControlButtonArea);
-        customerControl_Save.WidthPercent(50);
-        customerControl_Save.Text("Save");
-        customerControl_Save.BackgroundColor(0xff004a99);
-        customerControl_Save.TextColor(0xffffffff);
+//        EventDispatcher.registerEventForDelegation(this, "connectButton", "Click");
+        EventDispatcher.registerEventForDelegation(this, "postButton", "Click");
+//        EventDispatcher.registerEventForDelegation(this, "putButton", "Click");
+//        EventDispatcher.registerEventForDelegation(this, "deleteButton", "Click");
+//        EventDispatcher.registerEventForDelegation(this, "getButton", "Click");
+        EventDispatcher.registerEventForDelegation(this, "webComponent_POST", "GotText");
     }
 
-    public static int getScreenWidth()
-    {
+    String RequestValue (String s1, String s2) {
+        // Purpose: To combine two strings into a name=value pair
+        // Expects: Two strings
+        // Returns: One string of the form s1=s2
+        return s1 + '=' + s2;
+    }
+
+    String RequestCombine (String[] Pairs) {
+        // Purpose: To combine multiple strings (of the form name=value) into a web data string
+        // Expects: Series of strings
+        // Returns: One string of the form string&string&string
+        int i=Pairs.length;
+        int count = (int) i/2;
+        String result = new String();
+        for (int loop=0; loop<i; loop+=1){
+            result += Pairs[loop];
+            if (loop < (i-1)) {
+                result += "&";
+            }
+        }
+        return result;
+    }
+
+    public boolean dispatchEvent(Component component, String componentName, String eventName, Object[] params) {
+        if (component.equals(connectionButton) && eventName.equals("Click")) {
+            return true;
+        }
+        else if (component.equals(webComponent_POST) && eventName.equals("GotText")) {
+            String result = (String) params[3];
+            youveGotText(result);
+            return true;
+        }
+//        Arranges all info into a URL to send as a request to the backend
+        else if (component.equals(postButton) && eventName.equals("Click")) {
+            data_PPSN PPSNValidate = new data_PPSN();
+            if (PPSNValidate.Valid(ppsBox.Text())){
+                targetURL = urlBox.Text();
+                debugLabel.Text(targetURL);
+                postButton.Text("sending");
+                webComponent_POST.Url(targetURL);
+                String textToPost =
+                       RequestCombine(new String[]{
+                                RequestValue("sessionID",sessionIDBox.Text()),
+                                RequestValue("entity","person"),
+                                RequestValue("First",firstName.Text()),
+                                RequestValue("Family",lastName.Text()),
+                                RequestValue("Email", email.Text()),
+                                RequestValue("Phone", phone.Text()),
+                                RequestValue("Address1", addressLineOne.Text()),
+                                RequestValue("Address2", addressLineTwo.Text()),
+                                RequestValue("Address3", addressLineThree.Text()),
+                                RequestValue("PPS", ppsBox.Text()),
+                        });
+                webComponent_POST.PostText(textToPost);
+                debugLabel.Text(textToPost);
+                return true;
+            }
+        }
+        else if (component.equals(putButton) && eventName.equals("Click")) {
+            return true;
+        }
+        else if (component.equals(deleteButton) && eventName.equals("Click")) {
+            return true;
+        }
+        else if (component.equals(getButton) && eventName.equals("Click")) {
+            getButtonClick();
+            return true;
+        }
+        else {
+        }
+
+        // here is where you'd check for other events of your app...
+        return false;
+    }
+
+    public void getButtonClick() {
+
+//        targetURL = urlBox.Text();
+//        webComponent_POST.Url(targetURL);
+//        webComponent_POST.Get();
+    }
+    //      Get the result of the request
+    public void youveGotText(String result) {
+        postButton.Text("Got data");
+        debugLabel.Text(result);
+        try {
+            JSONObject parser = new JSONObject(result);
+            debugLabel.Text(result);
+//                    parser.getString("result") + " (" +
+//                            parser.getString("sessionID") + ")"
+//            );
+
+        } catch (JSONException e) {
+            // if an exception occurs, code for it in here
+        }
+    }
+
+public static int getScreenWidth()
+        {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
-    }
+        }
 
-    //get height of screen
-    public static int getScreenHeight()
-    {
+//get height of screen
+public static int getScreenHeight()
+        {
         return Resources.getSystem().getDisplayMetrics().heightPixels;
-    }
+}
+
 }
