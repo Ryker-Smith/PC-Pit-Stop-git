@@ -31,7 +31,7 @@ import static net.fachtnaroe.pcpitstop_git.code_commonBits.targetURL;
 
 public class screen07_customerHome extends Form implements HandlesEventDispatching
 {
-    private VerticalArrangement mainContainer;
+    private VerticalArrangement mainContaine;
     private VerticalArrangement leftSideSpacer;
     private VerticalArrangement headerArrangement;
     private HorizontalArrangement customerScreenBodyWithSpacer;
@@ -56,6 +56,9 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
     private Button jobsControlReport;
     private HorizontalArrangement customerDetailsControlButtonArea;
     private Button customerDetailsControlReport;
+    private HorizontalArrangement actionsDetailsControlButtonArea;
+    private Button actionsDetailsControlReport;
+    private VerticalScrollArrangement mainContainer;
 
     protected void $define()
     {
@@ -66,12 +69,11 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
         }
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        mainContainer = new VerticalArrangement(this);
+        mainContainer = new VerticalScrollArrangement(this);
         mainContainer.Width(getScreenWidth());
         mainContainer.Height(getScreenHeight());
         mainContainer.BackgroundColor(0xff99bbff);
         myNotify = new Notifier(mainContainer);
-
 
         headerArrangement = new VerticalArrangement(mainContainer);
         headerArrangement.Width((int)(getScreenWidth()));
@@ -103,42 +105,43 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
         customerDetailsArrangement.BackgroundColor(0xffe6f2ff);
         customerDetailsArrangement.HeightPercent(20);
 
-        customersLabel = new Label(customerDetailsArrangement);
-        customersLabel.FontSize(20);
-        customersLabel.TextColor(0xff000000);
-        customersLabel.Visible(true);
-        customersLabel.Text("My Details:");
+            customersLabel = new Label(customerDetailsArrangement);
+            customersLabel.FontSize(20);
+            customersLabel.TextColor(0xff000000);
+            customersLabel.Visible(true);
+            customersLabel.Text("My Details:");
 
-        customerDetails = new TextBox(customerDetailsArrangement);
-        customerDetails.Enabled(false);
-        customerDetails.Text("Customer Details go here");
-        customerDetails.WidthPercent(90);
-        customerDetails.HeightPercent(35);
+            customerDetails = new TextBox(customerDetailsArrangement);
+            customerDetails.Enabled(false);
+            customerDetails.Text("Customer Details go here");
+            customerDetails.WidthPercent(90);
+            customerDetails.HeightPercent(35);
 
-//        customerDetailsControlButtonArea = new HorizontalArrangement(customerScreenBody);
-//        customerDetailsControlButtonArea.WidthPercent(90);
-//        customerDetailsControlButtonArea.BackgroundColor(0xff99bbff);
-//        customerDetailsControlButtonArea.HeightPercent(10);
-//
-//        customerDetailsControlReport = new Button(jobsControlButtonArea);
-//        customerDetailsControlReport.WidthPercent(50);
-//        customerDetailsControlReport.Text("Report");
-//        customerDetailsControlReport.BackgroundColor(0xff004a99);
-//        customerDetailsControlReport.TextColor(0xffffffff);
+            customerDetailsControlButtonArea = new HorizontalArrangement(customerScreenBody);
+            customerDetailsControlButtonArea.WidthPercent(90);
+            customerDetailsControlButtonArea.BackgroundColor(0xff99bbff);
+            customerDetailsControlButtonArea.HeightPercent(10);
+
+            customerDetailsControlReport = new Button(customerDetailsControlButtonArea);
+            customerDetailsControlReport.WidthPercent(30);
+    //        customerDetailsControlReport.HeightPercent(100);
+            customerDetailsControlReport.Text("Report");
+            customerDetailsControlReport.BackgroundColor(0xff004a99);
+            customerDetailsControlReport.TextColor(0xffffffff);
 
         jobsLabel = new Label(customerScreenBody);
         jobsLabel.FontSize(20);
         jobsLabel.TextColor(0xff000000);
         jobsLabel.Visible(true);
-        jobsLabel.Text("jobs:");
+        jobsLabel.Text("Jobs:");
 
         jobs = new VerticalScrollArrangement(customerScreenBody);
-        jobs.HeightPercent(25);
+        jobs.HeightPercent(20);
         jobs.WidthPercent(90);
         jobs.BackgroundColor(0xffffffff);
         jobList = new ListView(jobs);
         jobList.Width(LENGTH_FILL_PARENT);
-        jobList.HeightPercent(40);
+        jobList.HeightPercent(20);
         jobList.SelectionColor(COLOR_LTGRAY);
         jobList.ShowFilterBar(true);
         jobList.TextSize(40);
@@ -151,7 +154,7 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
         jobsControlButtonArea.HeightPercent(10);
 
         jobsControlReport = new Button(jobsControlButtonArea);
-        jobsControlReport.WidthPercent(50);
+        jobsControlReport.WidthPercent(30);
         jobsControlReport.Text("Report");
         jobsControlReport.BackgroundColor(0xff004a99);
         jobsControlReport.TextColor(0xffffffff);
@@ -171,6 +174,17 @@ public class screen07_customerHome extends Form implements HandlesEventDispatchi
         actionsDetails.Text("Job Action Details go here");
         actionsDetails.WidthPercent(90);
         actionsDetails.HeightPercent(25);
+
+        actionsDetailsControlButtonArea = new HorizontalArrangement(actionsforSelectedJobArrangement);
+        actionsDetailsControlButtonArea.WidthPercent(90);
+        actionsDetailsControlButtonArea.BackgroundColor(0xff99bbff);
+        actionsDetailsControlButtonArea.HeightPercent(10);
+
+        actionsDetailsControlReport = new Button(actionsDetailsControlButtonArea);
+        actionsDetailsControlReport.WidthPercent(50);
+        actionsDetailsControlReport.Text("Report");
+        actionsDetailsControlReport.BackgroundColor(0xff004a99);
+        actionsDetailsControlReport.TextColor(0xffffffff);
 
         jobList_webComponent = new Web(mainContainer);
         jobList_webComponent.Url(targetURL + "&" +
