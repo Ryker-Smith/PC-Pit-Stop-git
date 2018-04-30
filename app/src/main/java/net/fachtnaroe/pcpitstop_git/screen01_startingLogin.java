@@ -362,35 +362,56 @@ public class screen01_startingLogin extends Form implements HandlesEventDispatch
     }
 
     public void technicianGotText(String result) {
-        startActivity(new Intent(screen01_startingLogin.this, screen02_operatorHome.class));
         try {
             JSONObject parser = new JSONObject(result);
-//            outputBox.Text(
-//                    parser.getString("result") + " (" +
-//                           parser.getString("sessionID") + ")"
-//            );
-
-            if (parser.getString("result").equals("OK")) {}
+            debugBox.Text(
+                    parser.getString("Status") + " (" +
+                            parser.getString("sessionID") + ")"
+            );
+            if (parser.getString("Status").equals("OK")) {
+                sessionID= parser.getString("sessionID");
+//                localDB.StoreValue("sessionID", sessionID);
+//                localDB.StoreValue((String) "sessionID", (Object) sessionID);
+                Intent intent = new Intent(this, screen05_technicianHome.class);
+                Bundle b = new Bundle();
+                b.putString("sessionID", sessionID); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+//                finish();
+//                startActivity(new Intent(startingLogin_screen01.this, operatorHome_screen02.class));
+//                startingLogin_screen01.switchForm("customerAddEdit_screen04");
+            }
         } catch (JSONException e) {
             // if an exception occurs, code for it in here
+            myNotify.ShowMessageDialog("Error logging in", "Error", "OK");
         }
     }
 
     public void administratorGotText(String result) {
-        startActivity(new Intent(screen01_startingLogin.this, screen02_operatorHome.class));
         try {
             JSONObject parser = new JSONObject(result);
-//            outputBox.Text(
-//                    parser.getString("result") + " (" +
-//                           parser.getString("sessionID") + ")"
-//            );
-
-            if (parser.getString("Status").equals("OK")) {}
+            debugBox.Text(
+                    parser.getString("Status") + " (" +
+                            parser.getString("sessionID") + ")"
+            );
+            if (parser.getString("Status").equals("OK")) {
+                sessionID= parser.getString("sessionID");
+//                localDB.StoreValue("sessionID", sessionID);
+//                localDB.StoreValue((String) "sessionID", (Object) sessionID);
+                Intent intent = new Intent(this, screen09_administratorHome.class);
+                Bundle b = new Bundle();
+                b.putString("sessionID", sessionID); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
+                startActivity(intent);
+//                finish();
+//                startActivity(new Intent(startingLogin_screen01.this, operatorHome_screen02.class));
+//                startingLogin_screen01.switchForm("customerAddEdit_screen04");
+            }
         } catch (JSONException e) {
             // if an exception occurs, code for it in here
+            myNotify.ShowMessageDialog("Error logging in", "Error", "OK");
         }
     }
-
 
     public void nextScreen()
     {
