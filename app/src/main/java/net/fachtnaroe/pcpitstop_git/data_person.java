@@ -17,7 +17,7 @@ import static net.fachtnaroe.pcpitstop_git.screen04_customerAddEdit.email;
 import static net.fachtnaroe.pcpitstop_git.screen04_customerAddEdit.lastName;
 import static net.fachtnaroe.pcpitstop_git.screen04_customerAddEdit.firstName;
 import static net.fachtnaroe.pcpitstop_git.screen04_customerAddEdit.phone;
-//import static net.fachtnaroe.pcpitstop_git.screen04_customerAddEdit.ppsBox;
+import static net.fachtnaroe.pcpitstop_git.screen04_customerAddEdit.ppsBox;
 
 /**
  * Created by fachtna on 09/03/18.
@@ -91,7 +91,7 @@ public class data_person extends Form implements HandlesEventDispatching{
             addressLineOne.Text(Address1);
             addressLineTwo.Text(Address2);
             addressLineThree.Text(Address3);
-//            ppsBox.Text(pps.Number);
+            ppsBox.Text(pps.Number);
 
         } catch (JSONException e) {
             // if an exception occurs, code for it in here
